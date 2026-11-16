@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DesTrip26 — Road Trip Desember 2026</title>
+<meta name="description" content="Rencana road trip 16–31 Desember 2026: Perawang (Riau) → Palembang → Pekalongan → Dieng → Jakarta → kembali ke Riau. Rute per fase, estimasi ETA, tol, kapal, BBM Pertalite (Innova 2015), tautan peta, dan foto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&family=Fragment+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink: oklch(0.395 0.067 234);
+  --ink-strong: oklch(0.32 0.062 234);
+  --ink-tint: oklch(0.96 0.012 234);
+  --line: oklch(0.92 0.006 234);
+  --line-strong: oklch(0.88 0.008 234);
+  --bg: oklch(0.985 0.003 234);
+  --text: oklch(0.18 0.006 234);
+  --muted: oklch(0.55 0.006 234);
+  --sea: oklch(0.58 0.16 300);
+  --font-display: 'Archivo', sans-serif;
+  --font-body: 'Public Sans', sans-serif;
+  --font-mono: 'Fragment Mono', monospace;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased}
+a{color:inherit; text-decoration:none}
+img{display:block; max-width:100%}
+.wrap{max-width:1280px; margin:0 auto; padding:0 24px; border-left:1px solid var(--line); border-right:1px solid var(--line)}
+
+/* ── Topbar ── */
+.topbar{position:fixed; inset:0 0 auto 0; z-index:30; background:rgba(255,255,255,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1280px; margin:0 auto; padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; gap:24px}
+.brand{display:flex; align-items:center; gap:10px}
+.mark{width:28px; height:28px; background:var(--ink); color:white; display:grid; place-items:center; font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:0.04em}
+.brand-name{font-family:var(--font-display); font-weight:700; font-size:14px; letter-spacing:-0.02em}
+.nav{display:flex; gap:20px}
+.nav a{font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); padding:6px 0; border-bottom:1px solid transparent}
+.nav a.active{color:var(--ink); border-bottom-color:var(--ink)}
+.actions{display:flex; gap:8px}
+.btn{font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; padding:8px 14px; border:1px solid var(--line-strong); background:white; cursor:pointer; display:inline-flex; align-items:center; gap:6px}
+.btn.primary{background:var(--ink); color:white; border-color:var(--ink)}
+
+/* ── Hero ── */
+.hero{position:relative; padding-top:72px; overflow-x:clip; background:radial-gradient(640px circle at var(--mx,72%) var(--my,16%), rgba(31,95,127,0.07), transparent 64%)}
+.hero-grid{display:grid; grid-template-columns:7fr 5fr}
+.hero-left{text-align:center; padding:48px 24px; max-width:1200px; margin:0 auto}
+.kicker{font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink); display:flex; gap:8px; align-items:center}
+.kicker::before{content:''; width:6px; height:6px; background:var(--ink); display:inline-block; flex:none}
+.hero h1{font-family:var(--font-display); font-weight:800; letter-spacing:-0.025em; line-height:1.05; font-size:clamp(38px, 4.6vw, 58px); margin-top:24px; max-width:30ch; position:relative}
+.hero h1 em{font-style:normal; color:var(--ink)}
+.hero h1 em.hl{position:relative; z-index:0; white-space:nowrap}
+.hero h1 em.hl::before{content:''; position:absolute; left:-0.06em; right:-0.06em; bottom:0.04em; height:0.44em; background:rgba(150,95,200,0.24); z-index:-1; transform:scaleX(0); transform-origin:left center; animation:hlSweep 720ms 640ms cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes hlSweep{to{transform:scaleX(1)}}
+.hero p{margin-top:16px; font-size:15px; color:var(--muted); max-width:58ch; line-height:1.65}
+.hero-ctas{display:flex; gap:12px; margin-top:32px; flex-wrap:wrap; justify-content:center}
+
+/* Floating cards — tempat wisata sepanjang rute */
+.cloud{position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-content:start; padding:40px 0 36px 32px}
+.fslot{position:relative; animation:slotIn 760ms cubic-bezier(0.16,1,0.3,1) both; animation-delay:calc(240ms + var(--i,0)*110ms); will-change:transform}
+@keyframes slotIn{from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:none}}
+.fcard{position:relative; z-index:1; background:white; border:1px solid var(--line-strong); transform:rotate(var(--r,0deg)); box-shadow:0 12px 26px -18px rgba(26,76,101,0.55); transition:transform 340ms cubic-bezier(0.16,1,0.3,1), box-shadow 340ms cubic-bezier(0.16,1,0.3,1); animation:float var(--fdur,9s) ease-in-out var(--fdel,0s) infinite alternate}
+@keyframes float{from{translate:0 0} to{translate:0 -8px}}
+.fcard:hover{z-index:6; transform:rotate(0deg) translateY(-7px); box-shadow:0 26px 42px -22px rgba(26,76,101,0.6)}
+.fcard:hover .fc-media img{transform:scale(1.07)}
+.fc-media{overflow:hidden; aspect-ratio:4/3; background:var(--ink-tint)}
+.fc-media img{width:100%; height:100%; object-fit:cover; transition:transform 600ms cubic-bezier(0.16,1,0.3,1)}
+.fc-body{padding:11px 12px 13px}
+.fc-tag{font-family:var(--font-mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink)}
+.fc-name{font-family:var(--font-display); font-weight:700; font-size:14px; letter-spacing:-0.02em; line-height:1.25; margin-top:5px; color:var(--text)}
+.fc-desc{font-size:11.5px; line-height:1.5; color:var(--ink); margin-top:5px}
+.trail{position:absolute; z-index:8; width:106px; height:72px; margin:-36px 0 0 -53px; background-size:cover; background-position:center; border:2px solid white; box-shadow:0 14px 30px -14px rgba(26,76,101,0.55); pointer-events:none; rotate:var(--tr,0deg); animation:trailOut 780ms cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes trailOut{0%{opacity:0; scale:0.5; translate:0 0} 22%{opacity:1; scale:1; translate:0 0} 100%{opacity:0; scale:1.04; translate:0 -18px}}
+
+/* Rail perjalanan (ganti ribbon vertikal) */
+.hero-rail{list-style:none; display:grid; grid-template-columns:repeat(5,1fr); gap:0; border-top:1px solid var(--line); margin-top:4px; padding-top:24px; justify-items:center}
+.fc-tag{font-family:var(--font-mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink)}
+.fc-name{font-family:var(--font-display); font-weight:700; font-size:14px; letter-spacing:-0.02em; line-height:1.25; margin-top:5px; color:var(--text)}
+.fc-desc{font-size:11.5px; line-height:1.5; color:var(--ink); margin-top:5px}
+.trail{position:absolute; z-index:8; width:106px; height:72px; margin:-36px 0 0 -53px; background-size:cover; background-position:center; border:2px solid white; box-shadow:0 14px 30px -14px rgba(26,76,101,0.55); pointer-events:none; rotate:var(--tr,0deg); animation:trailOut 780ms cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes trailOut{0%{opacity:0; scale:0.5; translate:0 0} 22%{opacity:1; scale:1; translate:0 0} 100%{opacity:0; scale:1.04; translate:0 -18px}}
+
+/* Rail perjalanan (ganti ribbon vertikal) */
+.hero-rail{list-style:none; display:grid; grid-template-columns:repeat(5,1fr); gap:0; border-top:1px solid var(--line); margin-top:4px; padding-top:24px; justify-items:center}
+.rleg{position:relative; padding:0; margin:0}
+.rleg::after{content:''; position:absolute; left:21px; right:0; top:10px; height:1px; background:var(--line-strong); transform-origin:left center}
+.rleg:last-child::after{display:none}
+.rleg .dot{width:21px; height:21px; border:1px solid var(--ink); background:white; display:grid; place-items:center; font-family:var(--font-mono); font-size:9.5px; color:var(--ink); position:relative; z-index:1; transition:transform 220ms cubic-bezier(0.25,1,0.5,1)}
+.rleg.solid .dot{background:var(--ink); color:white}
+.rleg.sea .dot{border-color:var(--sea); color:var(--sea)}
+.rleg:hover .dot{transform:translateY(-2px)}
+.r-name{font-family:var(--font-display); font-weight:700; font-size:14.5px; letter-spacing:-0.02em; line-height:1.3; margin-top:13px; color:var(--text)}
+.r-meta{font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-top:4px; letter-spacing:0.02em}
+.hero-rail.reveal.in .rleg::after{animation:drawX 560ms var(--ad,0ms) cubic-bezier(0.16,1,0.3,1) both}
+.hero-rail.reveal.in .rleg .dot{animation:dotPop 460ms var(--ad,0ms) cubic-bezier(0.16,1,0.3,1) both}
+@keyframes drawX{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+@keyframes drawY{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+@keyframes dotPop{from{opacity:0; transform:translateY(8px) scale(0.7)} to{opacity:1; transform:none}}
+.hero-rail .rleg:nth-child(1){--ad:200ms}
+.hero-rail .rleg:nth-child(2){--ad:320ms}
+.hero-rail .rleg:nth-child(3){--ad:440ms}
+.hero-rail .rleg:nth-child(4){--ad:560ms}
+.hero-rail .rleg:nth-child(5){--ad:680ms}
+
+/* Metric strip */
+.metrics{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); justify-items:center}
+.metric{padding:18px 20px; border-right:1px solid var(--line)}
+.metric:last-child{border-right:0}
+.metric .m-k{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted)}
+.metric .m-v{font-family:var(--font-display); font-weight:800; font-size:clamp(19px, 2vw, 24px); letter-spacing:-0.015em; margin-top:6px; line-height:1.1}
+.metric .m-s{font-size:12px; color:var(--muted); margin-top:4px}
+
+/* ── Kartu hari ── */
+.day{padding-top:34px}
+.day:last-of-type{padding-bottom:6px}
+.day > .wrap{background:white; border:1px solid var(--line-strong); padding:34px 26px 6px; max-width:1240px; transition:box-shadow 340ms cubic-bezier(0.16,1,0.3,1)}
+.day > .wrap:hover{box-shadow:0 22px 48px -30px rgba(26,76,101,0.35)}
+.day-head{display:grid; grid-template-columns:132px 1fr auto; gap:26px; align-items:start; padding:0 0 26px}
+.day-date{border:1px solid var(--ink); background:var(--ink); color:white; padding:11px 14px 0}
+.day-date.tint{background:var(--ink-tint); color:var(--ink); border-color:var(--line-strong)}
+.day-date .dm{font-family:var(--font-mono); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; display:block}
+.day-date .dd{font-family:var(--font-display); font-weight:800; font-size:44px; line-height:1; letter-spacing:-0.03em; display:block; margin-top:7px; font-variant-numeric:tabular-nums; white-space:nowrap}
+.day-date .dd.r{font-size:32px; letter-spacing:-0.02em; padding-bottom:12px}
+.day-date .dw{display:block; margin-top:9px; padding:7px 0 10px; border-top:1px solid rgba(255,255,255,0.32); font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase}
+.day-date.tint .dw{border-top-color:rgba(31,95,127,0.3)}
+.day-tag{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); display:flex; gap:8px; align-items:center}
+.day-tag::before{content:''; width:6px; height:6px; background:var(--ink); display:inline-block}
+.day-title{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02em; line-height:1.05; font-size:clamp(26px, 3vw, 36px); margin-top:10px}
+.day-desc{font-size:14.5px; color:var(--muted); margin-top:10px; max-width:64ch}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px}
+.chip{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid var(--line-strong); padding:5px 9px; background:white; color:var(--ink)}
+.chip.solid{background:var(--ink); color:white; border-color:var(--ink)}
+.chip.sea{border-color:var(--sea); color:var(--sea)}
+
+/* ETA callout */
+.eta{background:var(--ink); color:white; padding:18px 20px; min-width:288px; max-width:340px; position:relative; overflow:hidden}
+.eta::after{content:''; position:absolute; inset:0; background:radial-gradient(420px 200px at 88% 0%, rgba(255,255,255,0.10), transparent 65%); pointer-events:none}
+.eta-k{font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.7; position:relative; z-index:1}
+.eta-v{font-family:var(--font-display); font-weight:800; font-size:19px; letter-spacing:-0.015em; line-height:1.25; margin-top:7px; position:relative; z-index:1}
+.eta-s{font-size:12.5px; line-height:1.55; opacity:0.85; margin-top:9px; position:relative; z-index:1}
+
+/* Isi hari: dua kolom — dipisah jarak, bukan garis */
+.day-body{display:grid; grid-template-columns:1fr 1fr; gap:0 48px; border-top:1px solid var(--line); margin-top:4px; padding-top:28px}
+.col{padding:0 0 4px}
+.col.l, .col.r{padding-left:0; padding-right:0; border-right:0}
+.col-title{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:16px}
+
+/* perhentian */
+.stops{list-style:none; display:grid}
+.stop{position:relative; display:grid; grid-template-columns:64px 32px 1fr; padding:12px 0; border-bottom:1px solid var(--line); transition:background 220ms}
+.stop:last-child{border-bottom:0}
+.stop::before{content:''; position:absolute; left:74px; top:0; bottom:0; width:1px; background:var(--line-strong)}
+.stop:first-child::before, .stop-day + .stop::before{top:50%}
+.stop.day-end::before, .stop:last-child::before{bottom:50%}
+.stops .stop:hover{background:var(--ink-tint)}
+.stop .t{grid-column:1; grid-row:1; align-self:start; padding-top:1px; padding-right:12px; font-family:var(--font-mono); font-size:11.5px; color:var(--ink); letter-spacing:0.03em; text-align:right; white-space:nowrap}
+.stop .dot{grid-column:2; grid-row:1; align-self:center; justify-self:start; width:21px; height:21px; border:1px solid var(--ink); background:white; position:relative; z-index:1; transition:background 220ms}
+.stops .stop:hover .dot{background:var(--ink)}
+.stop .b{grid-column:3; grid-row:1; font-size:13.5px}
+.stop .b b{font-weight:600}
+.stop .b span{display:block; font-size:12.5px; color:var(--muted); margin-top:2px}
+.stop-day{padding:14px 0 5px; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); border-bottom:1px solid var(--line)}
+.reveal.in .stops > li{animation:segIn 500ms cubic-bezier(0.16,1,0.3,1) both}
+.stops > li:nth-child(1){animation-delay:80ms}
+.stops > li:nth-child(2){animation-delay:140ms}
+.stops > li:nth-child(3){animation-delay:200ms}
+.stops > li:nth-child(4){animation-delay:260ms}
+.stops > li:nth-child(5){animation-delay:320ms}
+.stops > li:nth-child(6){animation-delay:380ms}
+.stops > li:nth-child(7){animation-delay:440ms}
+
+/* segmen rute */
+.route{display:grid}
+.seg{position:relative; display:grid; grid-template-columns:24px 1fr auto; column-gap:12px; row-gap:4px; align-items:center; padding:12px 0; border-bottom:1px solid var(--line); transition:background 220ms}
+.seg:last-child{border-bottom:0}
+.seg::before{content:''; position:absolute; left:11px; top:0; bottom:0; width:1px; background:var(--line-strong)}
+.seg:first-child::before{top:50%}
+.seg:last-child::before{bottom:50%}
+.route .seg:hover{background:var(--ink-tint)}
+.seg .dot{grid-row:1 / span 2; grid-column:1; align-self:center; justify-self:start; width:22px; height:22px; border:1px solid var(--ink); background:white; display:grid; place-items:center; font-family:var(--font-mono); font-size:9.5px; color:var(--ink); position:relative; z-index:1; transition:background 220ms, color 220ms}
+.route .seg:hover .dot{background:var(--ink); color:white}
+.seg-name{grid-column:2; grid-row:1; font-size:13.5px; font-weight:600}
+.seg-meta{grid-column:2; grid-row:2; font-family:var(--font-mono); font-size:10.5px; color:var(--muted); letter-spacing:0.03em}
+.seg-km{grid-column:3; grid-row:1 / span 2; align-self:center; font-family:var(--font-mono); font-size:13px; color:var(--ink); text-align:right; white-space:nowrap}
+.seg-day{font-family:var(--font-mono); font-size:10px; font-weight:400; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted); margin-left:7px; white-space:nowrap}
+.seg.sub .seg-name{font-weight:500}
+.seg.sub .seg-name::before{content:'↳ '; font-family:var(--font-mono); font-size:11px; font-weight:400; color:var(--muted)}
+.seg.total{background:var(--ink-tint); border-bottom:0; padding:13px 12px; margin:0 -12px}
+.seg.total::before{display:none}
+.seg.total .seg-name{font-family:var(--font-mono); font-size:11px; font-weight:500; letter-spacing:0.07em; text-transform:uppercase}
+.reveal.in .route .seg{animation:segIn 520ms cubic-bezier(0.16,1,0.3,1) both}
+.route .seg:nth-child(1){animation-delay:90ms}
+.route .seg:nth-child(2){animation-delay:170ms}
+.route .seg:nth-child(3){animation-delay:250ms}
+.route .seg:nth-child(4){animation-delay:330ms}
+.route .seg:nth-child(5){animation-delay:410ms}
+@keyframes segIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+.flag{display:inline-block; font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.07em; text-transform:uppercase; border:1px solid var(--line-strong); padding:1px 6px; margin-right:6px; color:var(--muted); background:white}
+.flag.tol{color:var(--ink); border-color:var(--ink)}
+.flag.sea{color:var(--sea); border-color:var(--sea)}
+
+/* catatan */
+.note-box{border:1px solid var(--line); background:var(--ink-tint); padding:15px 16px; margin-top:20px}
+.note-box .side-title{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink)}
+.note-box p{font-size:13px; line-height:1.6; margin-top:7px}
+.note-box ul{margin-top:8px; padding-left:16px; display:grid; gap:4px}
+.note-box li{font-size:13px; line-height:1.55}
+.note-box li::marker{color:var(--ink)}
+
+/* chips tautan peta */
+.src-links{display:flex; flex-wrap:wrap; gap:6px 8px; align-items:center; margin-top:18px}
+.src-label{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted)}
+.src{position:relative; display:inline-flex; align-items:center; gap:5px; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink); border:1px solid var(--line-strong); padding:5px 9px; background:white; transition:border-color 220ms}
+.src .arrow{display:inline-block; transition:transform 220ms cubic-bezier(0.25,1,0.5,1)}
+.src::after{content:''; position:absolute; left:9px; right:9px; bottom:4px; height:1px; background:var(--ink); transform:scaleX(0); transform-origin:left; transition:transform 280ms cubic-bezier(0.16,1,0.3,1)}
+.src:hover{border-color:var(--ink)}
+.src:hover .arrow{transform:translate(2px,-2px)}
+.src:hover::after{transform:scaleX(1)}
+.src:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.reveal .src{opacity:0; transform:translateY(4px); transition:opacity 420ms cubic-bezier(0.16,1,0.3,1), transform 420ms cubic-bezier(0.16,1,0.3,1)}
+.reveal.in .src{opacity:1; transform:none}
+.reveal.in .src:nth-child(2){transition-delay:80ms}
+.reveal.in .src:nth-child(3){transition-delay:160ms}
+.reveal.in .src:nth-child(4){transition-delay:240ms}
+
+/* galeri — jarak antar foto, bukan garis tambahan */
+.gallery{display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-top:30px}
+.gcell{background:transparent; overflow:hidden}
+.gcell.wide{grid-column:span 2}
+.gcell img{width:100%; aspect-ratio:4/3; object-fit:cover; border:1px solid var(--line); transition:transform 600ms cubic-bezier(0.16,1,0.3,1)}
+.gcell.wide img{aspect-ratio:8/3}
+.gcell:hover img{transform:scale(1.03)}
+.gcap{font-family:var(--font-mono); font-size:10px; letter-spacing:0.04em; color:var(--muted); padding:7px 2px 0; display:flex; justify-content:space-between; gap:8px}
+.gcap a{color:var(--ink)}
+
+/* footer biaya per hari */
+.day-cost{display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 20px; margin-top:30px; padding:16px 0 26px; border-top:1px solid var(--line); font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.03em}
+.dc-label{font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted)}
+.dc-item{color:var(--muted)}
+.dc-item b{color:var(--ink); font-weight:400}
+.dc-total{color:var(--ink); background:var(--ink-tint); padding:4px 9px; font-weight:700}
+.dc-hint{font-size:10.5px; color:var(--muted); opacity:0.85}
+
+/* fakta tempat */
+.facts{display:grid; border-top:1px solid var(--line)}
+.fact{display:grid; grid-template-columns:132px 1fr; gap:14px; padding:11px 0; border-bottom:1px solid var(--line); font-size:13.5px}
+.fact .fk{font-family:var(--font-mono); font-size:10.5px; color:var(--muted); letter-spacing:0.05em; text-transform:uppercase; padding-top:2px}
+.fact .fv b{color:var(--ink)}
+.open-tag{display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink); border:1px solid var(--ink); padding:4px 9px; margin-top:14px; background:white}
+.open-tag::before{content:''; width:6px; height:6px; background:var(--ink)}
+
+/* ── Kalender ── */
+.section.cal-sec{border-top:0}
+.cal-head{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:end; padding-bottom:18px; border-bottom:1px solid var(--line)}
+.cal-legend{display:flex; flex-wrap:wrap; gap:8px 18px}
+.lg{display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted)}
+.sw{width:11px; height:11px; flex:none; background:white; border:1px solid var(--line-strong)}
+.sw.drive{background:var(--ink); border-color:var(--ink)}
+.sw.city{background:var(--ink-tint); border-color:var(--ink)}
+.sw.rest{background:var(--sea); border-color:var(--sea)}
+.cal{display:grid; grid-template-columns:repeat(7,1fr); border-left:1px solid var(--line); border-top:1px solid var(--line); margin-top:22px; background:white}
+.dow{font-family:var(--font-mono); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; color:var(--muted); text-align:center; padding:9px 4px; background:var(--ink-tint); border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+.cell{position:relative; min-height:92px; padding:9px 10px; display:flex; flex-direction:column; background:white; border-right:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; transform:translateY(9px); transition:opacity 460ms cubic-bezier(0.16,1,0.3,1), transform 460ms cubic-bezier(0.16,1,0.3,1), background-color 400ms cubic-bezier(0.16,1,0.3,1), color 400ms cubic-bezier(0.16,1,0.3,1)}
+.cal.in .cell{opacity:1; transform:none; transition-delay:calc(var(--i,0) * 14ms), calc(var(--i,0) * 14ms), calc(var(--i,0) * 14ms + 340ms), calc(var(--i,0) * 14ms + 340ms)}
+.cal.done .cell{transition-delay:0ms}
+.cell.empty{background:var(--bg)}
+.cell.we{background:oklch(0.978 0.004 234)}
+.num{font-family:var(--font-display); font-weight:700; font-size:15.5px; letter-spacing:-0.02em; line-height:1; color:var(--text)}
+.cell.off .num{color:oklch(0.74 0.006 234); font-weight:600}
+.lbl{margin-top:auto; padding-top:8px; font-family:var(--font-mono); font-size:9.5px; letter-spacing:0.05em; text-transform:uppercase; color:var(--muted); line-height:1.4; overflow-wrap:anywhere}
+.cell.trip{cursor:pointer}
+.cal.in .cell.trip.drive{background:var(--ink)}
+.cal.in .cell.trip.city{background:var(--ink-tint)}
+.cal.in .cell.trip.rest{background:var(--sea)}
+.cal.in .cell.trip.drive .num, .cal.in .cell.trip.rest .num{color:white}
+.cal.in .cell.trip.city .num{color:var(--ink)}
+.cal.in .cell.trip.drive .lbl, .cal.in .cell.trip.rest .lbl{color:rgba(255,255,255,0.76)}
+.cal.in .cell.trip.city .lbl{color:var(--ink)}
+.cell.trip .lbl::after{content:'↗'; display:inline-block; margin-left:4px; opacity:0; transform:translate(-3px,3px); transition:opacity 240ms cubic-bezier(0.16,1,0.3,1), transform 240ms cubic-bezier(0.16,1,0.3,1)}
+.cell.trip:hover .lbl::after, .cell.trip:focus-visible .lbl::after{opacity:1; transform:none}
+.cell.trip:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(26,76,101,0.16); z-index:2}
+.cal.done .cell.trip:hover{transition-delay:0ms}
+.cell.trip:focus-visible{outline:2px solid var(--ink); outline-offset:-2px; z-index:3}
+.cal-note{font-family:var(--font-mono); font-size:11px; letter-spacing:0.03em; color:var(--muted); margin-top:12px}
+section[id]{scroll-margin-top:74px}
+
+/* ── Biaya ── */
+.section{border-top:1px solid var(--line); padding:36px 0 40px}
+.day + .section{border-top:0; margin-top:38px}
+.section-head{display:grid; grid-template-columns:1fr auto; gap:24px; align-items:end; padding-bottom:20px; border-bottom:1px solid var(--line)}
+.section-title{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02em; font-size:clamp(24px, 2.6vw, 32px); line-height:1.1}
+.section-desc{font-size:14px; color:var(--muted); margin-top:8px; max-width:62ch}
+.grand{background:var(--ink); color:white; padding:18px 22px; text-align:right; min-width:260px}
+.grand .g-k{font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; opacity:0.7}
+.grand .g-v{font-family:var(--font-display); font-weight:800; font-size:clamp(24px, 2.8vw, 32px); letter-spacing:-0.03em; line-height:1.05; margin-top:6px}
+.grand .g-s{font-family:var(--font-mono); font-size:10.5px; opacity:0.7; margin-top:6px}
+
+.tabel{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:20px; background:white}
+.tabel th{font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); text-align:left; padding:10px 12px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--ink-tint)}
+.tabel td{padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+.tabel .r{text-align:right; font-family:var(--font-mono); white-space:nowrap; color:var(--ink)}
+.tabel .note{color:var(--muted); font-size:12.5px}
+.tabel tr.sub td{font-weight:700; background:var(--ink-tint); color:var(--ink)}
+.tabel tr.sub .r{font-weight:700}
+.tabel tr.total td{font-weight:700; background:var(--ink); color:white; border-color:var(--ink)}
+.tabel tr.total .r{color:white}
+.tabel tbody tr:hover td{background:oklch(0.975 0.004 234)}
+.tabel tr.sub:hover td, .tabel tr.total:hover td{filter:none}
+.disclaimer{font-family:var(--font-mono); font-size:11px; color:var(--muted); line-height:1.75; margin-top:14px; letter-spacing:0.02em; max-width:92ch}
+
+/* checklist */
+.checks{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); margin-top:26px}
+.check{padding:18px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:white}
+.check.accent{background:var(--ink-tint)}
+.check-title{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink)}
+.check ul{margin-top:11px; padding-left:16px; display:grid; gap:5px}
+.check li{font-size:13px; line-height:1.5}
+.check li::marker{color:var(--ink)}
+.recs{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); margin-top:26px}
+.rec{display:flex; flex-direction:column; gap:8px; padding:18px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:white}
+.rec-n{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; color:var(--muted)}
+.rec-name{font-family:var(--font-display); font-weight:700; font-size:15.5px; letter-spacing:-0.02em; line-height:1.3}
+.rec-desc{font-size:13px; line-height:1.55; color:var(--muted); margin:0}
+.rec .src{align-self:flex-start; margin-top:auto}
+
+/* saran form */
+.saran-form{margin-top:26px; border:1px solid var(--line); background:white; padding:24px; display:grid; gap:18px}
+.sf-row{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr))}
+.sf-field{display:grid; gap:7px; margin:0; padding:0; border:0; min-width:0}
+.sf-label{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink)}
+.sf-chips{display:flex; flex-wrap:wrap; gap:8px}
+.sf-chip{position:relative; display:inline-flex}
+.sf-chip input{position:absolute; inset:0; opacity:0; cursor:pointer; margin:0}
+.sf-chip span{font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; padding:7px 11px; border:1px solid var(--line-strong); background:white; color:var(--muted); transition:border-color 200ms, background 200ms, color 200ms; cursor:pointer}
+.sf-chip:hover span{border-color:var(--ink); color:var(--ink)}
+.sf-chip input:checked + span{background:var(--ink); border-color:var(--ink); color:white}
+.sf-chip input:focus-visible + span{outline:2px solid var(--ink); outline-offset:2px}
+.sf-input{width:100%; box-sizing:border-box; font:inherit; font-size:14px; color:var(--ink); padding:10px 12px; border:1px solid var(--line-strong); background:white; transition:border-color 220ms}
+.sf-input::placeholder{color:var(--muted); opacity:0.8}
+.sf-input:focus{outline:none; border-color:var(--ink)}
+textarea.sf-input{resize:vertical; min-height:108px; line-height:1.55}
+.sf-meta{display:flex; justify-content:space-between; gap:12px; align-items:baseline; flex-wrap:wrap}
+.sf-hint{font-size:12px; color:var(--muted); max-width:56ch}
+.sf-count{font-family:var(--font-mono); font-size:10.5px; color:var(--muted); white-space:nowrap}
+.sf-actions{display:flex; flex-wrap:wrap; gap:10px; align-items:center; padding-top:16px; border-top:1px solid var(--line)}
+.sf-status{font-family:var(--font-mono); font-size:11px; letter-spacing:0.03em; color:var(--ink); opacity:0; transform:translateY(4px); transition:opacity 260ms cubic-bezier(0.16,1,0.3,1), transform 260ms cubic-bezier(0.16,1,0.3,1)}
+.sf-status.show{opacity:1; transform:none}
+
+/* reveal & motion */
+.reveal{opacity:0; transform:translateY(12px); transition:opacity 560ms cubic-bezier(0.16,1,0.3,1), transform 560ms cubic-bezier(0.16,1,0.3,1)}
+.reveal.in{opacity:1; transform:none}
+.metric, .note-box, .check, .day-date, .eta, .rleg .dot{transition:transform 220ms cubic-bezier(0.25,1,0.5,1), box-shadow 220ms cubic-bezier(0.25,1,0.5,1)}
+.metric:hover, .note-box:hover, .check:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(26,76,101,0.08)}
+.btn{transition:transform 160ms cubic-bezier(0.25,1,0.5,1), background 160ms, border-color 160ms}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1; transform:none; transition:none}
+  .reveal .src{opacity:1; transform:none; transition:none}
+  .src::after, .src .arrow{transition:none}
+  .metric, .note-box, .check, .gcell img, .day > .wrap{transition:none}
+  .day > .wrap:hover{box-shadow:none}
+  .cell{opacity:1; transform:none; transition:none}
+  .cell.trip .lbl::after{transition:none}
+  .sf-chip span, .sf-input, .sf-status{transition:none}
+  .reveal.in .route .seg{animation:none}
+  .seg, .seg .dot{transition:none}
+  .reveal.in .stops > li{animation:none}
+  .stop, .stop .dot{transition:none}
+  .fslot{animation:none; opacity:1; transform:none; translate:none}
+  .fcard{animation:none; transition:none}
+  .fcard:hover{transform:rotate(var(--r,0deg)); box-shadow:0 12px 26px -18px rgba(26,76,101,0.55)}
+  .fc-media img{transition:none}
+  .fcard:hover .fc-media img{transform:none}
+  .hero h1 em.hl::before{animation:none; transform:scaleX(1)}
+  .hero-rail.reveal.in .rleg::after{animation:none; transform:none}
+  .hero-rail.reveal.in .rleg .dot{animation:none; opacity:1; transform:none}
+  .rleg .dot{transition:none}
+  .rleg:hover .dot{transform:none}
+  .trail{display:none}
+}
+
+/* ── Responsive ── */
+@media (max-width: 1080px){
+  .day-head{grid-template-columns:116px 1fr; }
+  .day-date .dd.r{font-size:29px; padding-bottom:15px}
+  .eta{grid-column:1 / -1; max-width:none; min-width:0}
+  .stage{min-height:0; display:block; padding:34px 0 4px}
+  .stage-copy{max-width:none}
+  .cloud{position:relative; inset:auto; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; padding-bottom:6px; pointer-events:auto}
+  .fslot{position:relative; top:auto; left:auto; right:auto; bottom:auto; margin-top:0; width:auto}
+  .hero-rail{grid-template-columns:1fr}
+  .rleg{display:grid; grid-template-columns:22px 1fr; column-gap:14px; padding:0 0 20px}
+  .rleg .dot{grid-column:1; grid-row:1 / span 2; align-self:start}
+  .r-name{grid-column:2; grid-row:1; margin-top:0}
+  .r-meta{grid-column:2; grid-row:2}
+  .rleg::after{left:10px; top:14px; right:auto; bottom:-6px; width:1px; height:auto; transform-origin:center top}
+  .rleg:last-child{padding-bottom:0}
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric:nth-child(2n){border-right:0}
+  .metric:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media (max-width: 1080px) and (prefers-reduced-motion: no-preference){
+  .hero-rail.reveal.in .rleg::after{animation-name:drawY}
+}
+@media (max-width: 860px){
+  .day-body{grid-template-columns:1fr; gap:0}
+  .col.l{border-right:0; border-bottom:1px solid var(--line); padding:0 0 30px}
+  .col.r{padding:30px 0 4px}
+  .day > .wrap{padding:26px 18px 4px}
+  .section-head{grid-template-columns:1fr}
+  .cal-head{grid-template-columns:1fr; align-items:start}
+  .cal-legend{margin-top:4px}
+  .cell{min-height:76px; padding:7px 7px}
+  .lbl{font-size:9px; padding-top:6px}
+  .grand{text-align:left; min-width:0}
+  .gallery{grid-template-columns:repeat(2, 1fr); gap:14px}
+  .gcell.wide{grid-column:span 2}
+  .gcell.wide img{aspect-ratio:16/9}
+  .checks{grid-template-columns:1fr}
+  .nav{display:none}
+  .day-head{gap:16px}
+}
+@media (max-width: 560px){
+  .actions .btn:not(.primary){display:none}
+  .day{padding-top:22px}
+  .day > .wrap{padding:22px 14px 4px}
+  .day-head{grid-template-columns:1fr}
+  .day-date{display:inline-block; min-width:132px}
+  .day-date .dd.r{font-size:32px; padding-bottom:12px}
+  .cloud{grid-template-columns:1fr 1fr; gap:10px}
+  .metrics{grid-template-columns:1fr}
+  .metric{border-right:0; border-bottom:1px solid var(--line)}
+  .metric:last-child{border-bottom:0}
+  .fact{grid-template-columns:1fr; gap:2px}
+  .tabel .hide-sm{display:none}
+  .gallery{grid-template-columns:1fr}
+  .gcell.wide{grid-column:span 1}
+  .cell{min-height:66px; padding:6px 5px}
+  .num{font-size:13.5px}
+  .lbl{font-size:8px; letter-spacing:0.01em; line-height:1.3; padding-top:5px}
+  .dow{font-size:9px; letter-spacing:0.04em; padding:7px 2px}
+  .lg{font-size:9.5px; gap:5px}
+  .sw{width:9px; height:9px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="mark">26</span><span class="brand-name">Trip Des 2026</span></div>
+    <nav class="nav">
+      <a href="#kalender">Kalender</a>
+      <a href="#hari1" class="active">16–17 Des</a>
+      <a href="#hari3">18–22 Des</a>
+      <a href="#hari4">23–26 Des</a>
+      <a href="#hari6">27–29 Des</a>
+      <a href="#hari8">30–31 Des</a>
+      <a href="#rekomendasi">Rekomendasi</a>
+      <a href="#biaya">Biaya</a>
+      <a href="#saran">Saran</a>
+    </nav>
+    <div class="actions">
+      <a class="btn" href="#biaya">Total Biaya</a>
+      <a class="btn primary" href="https://www.google.com/maps/dir/?api=1&origin=Perawang,+Siak,+Riau&destination=Dataran+Tinggi+Dieng,+Jawa+Tengah" target="_blank" rel="noopener">Buka Rute ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="wrap">
+      <div class="hero-left reveal in">
+        <span class="kicker">16 – 31 Desember 2026 • Perawang → Palembang → Dieng → Jakarta</span>
+    <h1>16 hari, dua pulau, satu jalan pulang sebelum tahun berganti.</h1>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#biaya">Total Biaya</a>
+          <a class="btn" href="#hari1">Mulai Fase 01</a>
+        </div>
+      </div>
+    </div>
+    <ol class="hero-rail reveal in">
+      <li class="rleg solid"><span class="dot">01</span><div class="r-name">Perawang → Palembang</div><div class="r-meta">±729 km · 16 Des · inap 1 malam</div></li>
+      <li class="rleg sea"><span class="dot">02</span><div class="r-name">Feri + jemput keluarga</div><div class="r-meta">17 Des · Bakauheni → Merak → Pekalongan</div></li>
+      <li class="rleg"><span class="dot">03</span><div class="r-name">Singgah di Wiradesa</div><div class="r-meta">18 – 22 Des · di rumah Mbah</div></li>
+      <li class="rleg"><span class="dot">04</span><div class="r-name">Dataran Tinggi Dieng</div><div class="r-meta">23 – 26 Des · ±2.000 mdpl</div></li>
+      <li class="rleg solid"><span class="dot">05</span><div class="r-name">Jakarta → Perawang</div><div class="r-meta">27 – 31 Des · tiba sebelum 1 Jan 2027</div></li>
+    </ol>
+    <div class="metrics reveal">
+      <div class="metric"><div class="m-k">Jarak total</div><div class="m-v">±3.250 km</div><div class="m-s">Perawang – Palembang – Dieng – Jakarta</div></div>
+      <div class="metric"><div class="m-k">Waktu setir</div><div class="m-v">±46 jam</div><div class="m-s">Dihitung per leg, tanpa istirahat</div></div>
+      <div class="metric"><div class="m-k">Tol + kapal</div><div class="m-v">Rp 1,5 – 2,1 jt</div><div class="m-s">Golongan I, belum termasuk BBM</div></div>
+      <div class="metric"><div class="m-k">BBM Pertalite</div><div class="m-v">Rp 4,2 – 5,4 jt</div><div class="m-s">Innova 2015 · 1 liter ≈ 7–9 km · total ±3.800 km</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KALENDER ── -->
+<section id="kalender" class="section cal-sec">
+  <div class="wrap">
+    <div class="cal-head reveal">
+      <div>
+        <span class="day-tag">Gambaran perjalanan</span>
+        <h2 class="section-title" style="margin-top:10px">Kalender Desember 2026</h2>
+        <p class="section-desc">16 hari perjalanan ditandai: 6 hari menyetir, sisanya menginap &amp; jalan-jalan. Klik tanggal bertanda untuk melompat ke rinciannya.</p>
+      </div>
+      <div class="cal-legend">
+        <span class="lg"><i class="sw drive"></i>Menyetir</span>
+        <span class="lg"><i class="sw rest"></i>Menginap</span>
+        <span class="lg"><i class="sw city"></i>Jalan-jalan</span>
+      </div>
+    </div>
+
+    <div class="cal reveal" role="grid" aria-label="Kalender Desember 2026, hari perjalanan 16 sampai 31 Desember">
+      <div class="dow">Sen</div><div class="dow">Sel</div><div class="dow">Rab</div><div class="dow">Kam</div><div class="dow">Jum</div><div class="dow">Sab</div><div class="dow">Min</div>
+
+      <div class="cell empty" style="--i:0"></div>
+      <div class="cell off" style="--i:1"><span class="num">1</span></div>
+      <div class="cell off" style="--i:2"><span class="num">2</span></div>
+      <div class="cell off" style="--i:3"><span class="num">3</span></div>
+      <div class="cell off" style="--i:4"><span class="num">4</span></div>
+      <div class="cell off we" style="--i:5"><span class="num">5</span></div>
+      <div class="cell off we" style="--i:6"><span class="num">6</span></div>
+
+      <div class="cell off" style="--i:7"><span class="num">7</span></div>
+      <div class="cell off" style="--i:8"><span class="num">8</span></div>
+      <div class="cell off" style="--i:9"><span class="num">9</span></div>
+      <div class="cell off" style="--i:10"><span class="num">10</span></div>
+      <div class="cell off" style="--i:11"><span class="num">11</span></div>
+      <div class="cell off we" style="--i:12"><span class="num">12</span></div>
+      <div class="cell off we" style="--i:13"><span class="num">13</span></div>
+
+      <div class="cell off" style="--i:14"><span class="num">14</span></div>
+      <div class="cell off" style="--i:15"><span class="num">15</span></div>
+      <a class="cell trip drive" href="#hari1" style="--i:16" title="16 Des — Perawang ke Palembang"><span class="num">16</span><span class="lbl">Berangkat</span></a>
+      <a class="cell trip drive" href="#hari2" style="--i:17" title="17 Des — feri ke Jawa, jemput, lanjut ke Pekalongan"><span class="num">17</span><span class="lbl">Feri + jemput</span></a>
+      <a class="cell trip rest" href="#hari3" style="--i:18" title="18 Des — tiba di Wiradesa, rumah Mbah"><span class="num">18</span><span class="lbl">Tiba Wiradesa</span></a>
+      <a class="cell trip rest" href="#hari3" style="--i:19" title="19 Des — menginap di Wiradesa"><span class="num">19</span><span class="lbl">Menginap</span></a>
+      <a class="cell trip rest" href="#hari3" style="--i:20" title="20 Des — menginap di Wiradesa"><span class="num">20</span><span class="lbl">Menginap</span></a>
+
+      <a class="cell trip rest" href="#hari3" style="--i:21" title="21 Des — menginap di Wiradesa"><span class="num">21</span><span class="lbl">Menginap</span></a>
+      <a class="cell trip rest" href="#hari3" style="--i:22" title="22 Des — malam terakhir di Wiradesa"><span class="num">22</span><span class="lbl">Malam terakhir</span></a>
+      <a class="cell trip drive" href="#hari4" style="--i:23" title="23 Des — Pekalongan ke Dieng"><span class="num">23</span><span class="lbl">Ke Dieng</span></a>
+      <a class="cell trip city" href="#hari5" style="--i:24" title="24 Des — jalan-jalan di Dieng"><span class="num">24</span><span class="lbl">Dieng</span></a>
+      <a class="cell trip city" href="#hari5" style="--i:25" title="25 Des — jalan-jalan di Dieng"><span class="num">25</span><span class="lbl">Dieng</span></a>
+      <a class="cell trip city" href="#hari5" style="--i:26" title="26 Des — jalan-jalan di Dieng"><span class="num">26</span><span class="lbl">Dieng</span></a>
+      <a class="cell trip drive" href="#hari6" style="--i:27" title="27 Des — Dieng ke Jakarta"><span class="num">27</span><span class="lbl">Ke Jakarta</span></a>
+
+      <a class="cell trip city" href="#hari7" style="--i:28" title="28 Des — BXsea di Bintaro"><span class="num">28</span><span class="lbl">BXsea</span></a>
+      <a class="cell trip city" href="#hari7" style="--i:29" title="29 Des — Ragunan"><span class="num">29</span><span class="lbl">Ragunan</span></a>
+      <a class="cell trip drive" href="#hari8" style="--i:30" title="30 Des — Jakarta ke Palembang, menyeberang"><span class="num">30</span><span class="lbl">Pulang + feri</span></a>
+      <a class="cell trip drive" href="#hari8" style="--i:31" title="31 Des — Palembang ke Perawang"><span class="num">31</span><span class="lbl">→ Perawang</span></a>
+      <div class="cell empty" style="--i:32"></div>
+      <div class="cell empty" style="--i:33"></div>
+      <div class="cell empty" style="--i:34"></div>
+    </div>
+    <p class="cal-note reveal">16 &amp; 17 Des dua hari menyetir beruntun · 18–22 Des menetap di Wiradesa · 23 Des menanjak ke Dieng · 30–31 Des pulang, tiba sebelum 1 Januari 2027.</p>
+
+    <div class="cal-head reveal" style="margin-top:34px">
+      <div>
+        <span class="day-tag">Sampai Januari</span>
+        <h2 class="section-title" style="margin-top:10px">Januari 2027</h2>
+      </div>
+    </div>
+    <div class="cal reveal" role="grid" aria-label="Kalender Januari 2027, tiba 1 Januari">
+      <div class="dow">Sen</div><div class="dow">Sel</div><div class="dow">Rab</div><div class="dow">Kam</div><div class="dow">Jum</div><div class="dow">Sab</div><div class="dow">Min</div>
+      <div class="cell empty" style="--i:0"></div>
+      <div class="cell empty" style="--i:1"></div>
+      <div class="cell empty" style="--i:2"></div>
+      <div class="cell empty" style="--i:3"></div>
+      <a class="cell trip drive" href="#hari8" style="--i:4" title="1 Januari 2027 — tiba di Perawang"><span class="num">1</span><span class="lbl">Tiba</span></a>
+      <div class="cell off we" style="--i:5"><span class="num">2</span></div>
+      <div class="cell off we" style="--i:6"><span class="num">3</span></div>
+    </div>
+    <p class="cal-note reveal">1 Januari 2027 (Jumat) — rombongan sudah kembali ke Perawang sebelum pergantian tahun.</p>
+  </div>
+</section>
+
+<!-- ── HARI 01 ── -->
+<section id="hari1" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date"><span class="dm">Des 2026</span><span class="dd">16</span><span class="dw">Rabu</span></div>
+      <div>
+        <span class="day-tag">Fase 01 · Leg 1 dari Sumatera</span>
+        <h2 class="day-title">Perawang → Palembang</h2>
+        <p class="day-desc">Berangkat dari Perawang bersama Ummi, Shanum, Bang Musa, Kak Zul, dan Bang Muadz. Ikuti Jalan Lintas Timur Riau–Jambi–Palembang, dengan satu ruas tol Bayung Lencir–Tempino di tengah. Inap satu malam di Palembang — hotel belum dipilih.</p>
+        <div class="chips">
+          <span class="chip solid">±729 km</span>
+          <span class="chip">±8,8 jam setir</span>
+          <span class="chip">BBM Rp 0,8 – 1,1 jt</span>
+          <span class="chip">Tol Rp 40 – 80rb</span>
+          <span class="chip sea">Inap 1 malam</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Estimasi tiba</div>
+        <div class="eta-v">Rabu, 16 Des 2026 — berangkat 06.00, tiba ± 17.00–18.00</div>
+        <div class="eta-s">Waktu setir murni ±8,8 jam; realistis 11–12 jam dengan istirahat &amp; makan. Malam pertama di Palembang — jangan langsung lanjut ke Jawa.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Perhentian</div>
+        <ul class="stops">
+          <li class="stop"><span class="t">06.00</span><span class="dot"></span><span class="b"><b>Perawang, Siak</b><span>Berangkat — isi penuh BBM &amp; cek ban dulu</span></span></li>
+          <li class="stop"><span class="t">±09.00</span><span class="dot"></span><span class="b"><b>Pekanbaru → Jambi</b><span>Lintas Timur — jalan lurus, SPBU mulai jarang</span></span></li>
+          <li class="stop"><span class="t">±13.00</span><span class="dot"></span><span class="b"><b>Jambi</b><span>Makan siang &amp; sholat · isi BBM penuh</span></span></li>
+          <li class="stop"><span class="t">±15.30</span><span class="dot"></span><span class="b"><b>Tol Bayung Lencir → Tempino</b><span>Satu-satunya ruas tol di leg ini</span></span></li>
+          <li class="stop"><span class="t">±18.00</span><span class="dot"></span><span class="b"><b>Palembang</b><span>Check-in (hotel belum dipilih) · makan pempek</span></span></li>
+        </ul>
+        <div class="note-box">
+          <div class="side-title">Catatan keselamatan</div>
+          <p>±9 jam setir aman bila istirahat tiap 2 jam dan <b>dua sopir bergantian</b> bila bisa. Lintas Timur panjang dan sepi — jangan mengejar gelap, lebih baik bermalam di tengah (Jambi) daripada memaksa malam.</p>
+        </div>
+      </div>
+
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Segmen rute</div>
+        <div class="route">
+          <div class="seg"><span class="dot">01</span><div class="seg-name">Jalan Lintas Timur Riau → Jambi</div><div class="seg-km">±340 km</div><div class="seg-meta"><span class="flag">Non-tol</span>Jalan lurus, berkelok di dataran rendah</div></div>
+          <div class="seg"><span class="dot">02</span><div class="seg-name">Lintas Timur Jambi → Bayung Lencir</div><div class="seg-km">±280 km</div><div class="seg-meta"><span class="flag">Non-tol</span>SPBU berjarak jauh — isi di tiap kota</div></div>
+          <div class="seg"><span class="dot">03</span><div class="seg-name">Tol Bayung Lencir → Tempino</div><div class="seg-km">±40 km</div><div class="seg-meta"><span class="flag tol">Tol</span>Ruang tol Trans-Sumatra pertama</div></div>
+          <div class="seg"><span class="dot">04</span><div class="seg-name">Tempino → Palembang</div><div class="seg-km">±70 km</div><div class="seg-meta"><span class="flag">Non-tol</span>Masuk kota lewat jalan nasional</div></div>
+        </div>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/dir/?api=1&origin=Perawang,+Siak,+Riau&destination=Palembang,+Sumatera+Selatan" target="_blank" rel="noopener">Perawang → Palembang <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Ampera+Bridge+Palembang" target="_blank" rel="noopener">Jembatan Ampera <span class="arrow">↗</span></a>
+        </div>
+        <div class="note-box">
+          <div class="side-title">Hotel Palembang</div>
+          <p>Cari penginapan dekat pusat kota / Ampera agar pagi 17 Des langsung jalan ke arah Bakauheni. Harga tidak dihitung di halaman ini.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery reveal">
+      <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Asian%20Highway%2025%20(Trans-Sumatran%20East%20Highway),%20Talang%20Kelapa,%20Banyuasin,%20South%20Sumatra.jpg?width=900" alt="Jalan Lintas Timur Sumatera (AH25) di Banyuasin"><div class="gcap"><span>Jalan Lintas Timur AH25 — jalur utama leg ini</span><a href="https://commons.wikimedia.org/wiki/File:Asian_Highway_25_(Trans-Sumatran_East_Highway),_Talang_Kelapa,_Banyuasin,_South_Sumatra.jpg" target="_blank" rel="noopener">Wikimedia ↗</a></div></div>
+      <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ampera%20Bridge,%20Palembang,%20South%20Sumatra%20(December%202019)%20(1).jpg?width=900" alt="Jembatan Ampera di Palembang"><div class="gcap"><span>Jembatan Ampera, Palembang</span><a href="https://commons.wikimedia.org/wiki/File:Ampera_Bridge,_Palembang,_South_Sumatra_(December_2019)_(1).jpg" target="_blank" rel="noopener">Wikimedia ↗</a></div></div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya fase ini</span>
+      <span class="dc-item">Tol <b>Rp 40 – 80rb</b></span>
+      <span class="dc-item">BBM <b>Rp 0,8 – 1,1 jt</b></span>
+      <span class="dc-total">± Rp 0,8 – 1,2 juta</span>
+      <span class="dc-hint">BBM: Pertalite ±80–110 liter (7–9 km/L) · belum hotel &amp; makan</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HARI 02 ── -->
+<section id="hari2" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date tint"><span class="dm">Des 2026</span><span class="dd">17</span><span class="dw">Kamis</span></div>
+      <div>
+        <span class="day-tag">Fase 02 · Menyeberang ke Jawa</span>
+        <h2 class="day-title">Palembang → Feri → Pekalongan</h2>
+        <p class="day-desc">Hari terpanjang kedua. Tol Trans-Sumatra dari Palembang ke Bakauheni, kapal ke Merak, lanjut tol Jawa — singgah sebentar di Jakarta untuk menjemput Papah &amp; Yayah, baru menuju Wiradesa, Kab. Pekalongan.</p>
+        <div class="chips">
+          <span class="chip solid">±853 km</span>
+          <span class="chip">±10,7 jam setir</span>
+          <span class="chip">Tol + kapal Rp 750 – 960rb</span>
+          <span class="chip">BBM Rp 1,0 – 1,3 jt</span>
+          <span class="chip sea">1× feri wajib</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Estimasi tiba</div>
+        <div class="eta-v">Kamis, 17 Des malam — atau Jumat 18 Des pagi</div>
+        <div class="eta-s">Berangkat 06.00: feri ±2–3 jam termasuk antre, jemput di Jakarta ±1 jam, setir total ±10,7 jam. Realistis 15–18 jam — kalau antrean kapal panjang, tiba di Wiradesa pagi 18 Des.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Perhentian</div>
+        <ul class="stops">
+          <li class="stop"><span class="t">06.00</span><span class="dot"></span><span class="b"><b>Palembang</b><span>Berangkat — isi BBM penuh &amp; saldo e-Money</span></span></li>
+          <li class="stop"><span class="t">±11.00</span><span class="dot"></span><span class="b"><b>Bakauheni</b><span>Hampir seluruh leg tol · antre kapal</span></span></li>
+          <li class="stop"><span class="t">±13.00</span><span class="dot"></span><span class="b"><b>Merak</b><span>Tol Jakarta–Merak arah timur</span></span></li>
+          <li class="stop"><span class="t">±16.00</span><span class="dot"></span><span class="b"><b>Jakarta — jemput Papah &amp; Yayah</b><span>Singgah ±1 jam, langsung lanjut</span></span></li>
+          <li class="stop"><span class="t">±21.00</span><span class="dot"></span><span class="b"><b>Wiradesa</b><span>Tiba di rumah Mbah · kalau larut, lanjut 18 Des pagi</span></span></li>
+        </ul>
+        <div class="note-box">
+          <div class="side-title">Kenapa tidak menginap di Jakarta?</div>
+          <p>Rombongan menetap di Wiradesa mulai 18 Des, jadi Jakarta hanya <b>jemput sekilas</b>. Kalau kondisi lelah, opsi aman: tidur dulu di Jakarta sore 17 Des, baru lanjut ke Wiradesa pagi 18 Des — jadwal 18–22 Des tetap longgar.</p>
+        </div>
+      </div>
+
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Segmen rute</div>
+        <div class="route">
+          <div class="seg"><span class="dot">01</span><div class="seg-name">Palembang → Bakauheni</div><div class="seg-km">±381 km</div><div class="seg-meta"><span class="flag tol">Tol</span>Hampir seluruhnya tol Trans-Sumatra · ±4,7 jam</div></div>
+          <div class="seg"><span class="dot">02</span><div class="seg-name">Feri Bakauheni → Merak</div><div class="seg-km">±37 km</div><div class="seg-meta"><span class="flag sea">Kapal</span>Selat Sunda · reguler ±3 jam / eksekutif ±2 jam</div></div>
+          <div class="seg"><span class="dot">03</span><div class="seg-name">Merak → Jakarta</div><div class="seg-km">±120 km</div><div class="seg-meta"><span class="flag tol">Tol</span>Tol Jakarta–Merak + Tol Dalam Kota · jemput sekilas</div></div>
+          <div class="seg"><span class="dot">04</span><div class="seg-name">Jakarta → Pekalongan</div><div class="seg-km">±352 km</div><div class="seg-meta"><span class="flag tol">Tol</span>Tol Cipali arah Pejagan/Pemalang · ±4,5 jam</div></div>
+        </div>
+        <div class="note-box">
+          <div class="side-title">Kapal penyeberangan</div>
+          <p>Mobil golongan II + 1 sopir diperkirakan <b>Rp 160.000–200.000</b>, penumpang tambahan ± Rp 15.000/orang. Cek jadwal &amp; tarif resmi lewat aplikasi <b>Ferizy (ASDP)</b> — 17 Des masih pra-Natal, tapi akhir pekan bisa ramai.</p>
+        </div>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/dir/?api=1&origin=Palembang,+Sumatera+Selatan&destination=Pekalongan,+Jawa+Tengah" target="_blank" rel="noopener">Palembang → Pekalongan <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/dir/?api=1&origin=Bakauheni,+Lampung+Selatan&destination=Merak,+Cilegon,+Banten" target="_blank" rel="noopener">Rute feri <span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery reveal">
+      <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ferries.jpg?width=900" alt="Kapal feri di jalur Merak–Bakauheni"><div class="gcap"><span>Kapal feri Merak–Bakauheni</span><a href="https://commons.wikimedia.org/wiki/File:Ferries.jpg" target="_blank" rel="noopener">Wikimedia ↗</a></div></div>
+      <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Port%20of%20Bakauheni%20and%20Siger%20Tower.JPG?width=900" alt="Pelabuhan Bakauheni dan Menara Siger"><div class="gcap"><span>Bakauheni &amp; Menara Siger</span><a href="https://commons.wikimedia.org/wiki/File:Port_of_Bakauheni_and_Siger_Tower.JPG" target="_blank" rel="noopener">Wikimedia ↗</a></div></div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya fase ini</span>
+      <span class="dc-item">Tol Sumatera <b>Rp 350 – 450rb</b></span>
+      <span class="dc-item">Kapal <b>Rp 160 – 200rb</b></span>
+      <span class="dc-item">Tol Jawa <b>Rp 240 – 310rb</b></span>
+      <span class="dc-item">BBM <b>Rp 1,0 – 1,3 jt</b></span>
+      <span class="dc-total">± Rp 1,7 – 2,2 juta</span>
+      <span class="dc-hint">BBM: Pertalite ±95–122 liter (7–9 km/L)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HARI 03 ── -->
+<section id="hari3" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date tint"><span class="dm">Des 2026</span><span class="dd r">18–22</span><span class="dw">Jum – Sel</span></div>
+      <div>
+        <span class="day-tag">Fase 03 · Menetap 5 hari</span>
+        <h2 class="day-title">Wiradesa — Rumah Mbah</h2>
+        <p class="day-desc">Tidak ada perjalanan jauh. Dari 18 sampai 22 Des rombongan menetap di Wiradesa, Kab. Pekalongan — menginap di rumah Mbah, bebas keliling kota batik dan pantai utara. Malam 22 Des jadi malam terakhir sebelum menanjak ke Dieng.</p>
+        <div class="chips">
+          <span class="chip solid">18 – 22 Des</span>
+          <span class="chip">5 malam di Wiradesa</span>
+          <span class="chip">BBM lokal Rp 170 – 215rb</span>
+          <span class="chip sea">Pindah ke Dieng 23 Des</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Titik balik rombongan</div>
+        <div class="eta-v">Selasa, 22 Des — malam terakhir di Wiradesa</div>
+        <div class="eta-s">23 Des semua bergerak ke Dieng. Sisakan 22 Des malam untuk kemas barang &amp; cek kendaraan — mobil harus siap menanjak.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Fakta tempat</div>
+        <div class="facts">
+          <div class="fact"><div class="fk">Lokasi</div><div class="fv">Wiradesa, Kab. Pekalongan — rumah Mbah, dekat pantai utara &amp; Tol Cipali</div></div>
+          <div class="fact"><div class="fk">Kegiatan</div><div class="fv">Bersantai di rumah Mbah · sisanya bebas keliling kota</div></div>
+          <div class="fact"><div class="fk">Batik</div><div class="fv">Kota batik — Museum Batik Pekalongan &amp; kampung batik Kauman</div></div>
+          <div class="fact"><div class="fk">Pantai</div><div class="fv">Pantai Slamaran &amp; Pekalongan Utara — matahari terbenam</div></div>
+          <div class="fact"><div class="fk">Kuliner</div><div class="fv">Pindang serani, soto Pekalongan, lontong cap go meh</div></div>
+          <div class="fact"><div class="fk">Jarak</div><div class="fv">Ke Dieng hanya <b>±61 km</b> — 23 Des jadi hari ringan</div></div>
+        </div>
+        <span class="open-tag">18 – 22 Des — menetap ✓</span>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Pekalongan,+Jawa+Tengah" target="_blank" rel="noopener">Pekalongan <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Museum+Batik+Pekalongan" target="_blank" rel="noopener">Museum Batik <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Pantai+Slamaran+Pekalongan" target="_blank" rel="noopener">Pantai Slamaran <span class="arrow">↗</span></a>
+        </div>
+      </div>
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Galeri</div>
+        <div class="gallery" style="border-top:0; border-left:0; grid-template-columns:1fr">
+          <div class="gcell"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Batik%20Jawa%20Hokokai%20Pekalongan%20Tulis.jpg?width=900" alt="Batik tulis Jawa Hokokai khas Pekalongan" style="aspect-ratio:8/3"><div class="gcap"><span>Batik tulis khas Pekalongan</span><a href="https://commons.wikimedia.org/wiki/File:Batik_Jawa_Hokokai_Pekalongan_Tulis.jpg" target="_blank" rel="noopener">Wikimedia ↗</a></div></div>
+          <div class="gcell"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pantai%20slamaran.jpg?width=900" alt="Pantai Slamaran Pekalongan" style="aspect-ratio:8/3"><div class="gcap"><span>Pantai Slamaran</span><a href="https://commons.wikimedia.org/wiki/File:Pantai_slamaran.jpg" target="_blank" rel="noopener">Wikimedia ↗</a></div></div>
+        </div>
+        <div class="note-box">
+          <div class="side-title">Malam 22 Des</div>
+          <p>Isi BBM penuh, cek tekanan ban &amp; air radiator, kemas jaket tebal untuk Dieng. Besok pagi rombongan berangkat bersama — jangan ada yang tertinggal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya fase ini</span>
+      <span class="dc-item">BBM lokal <b>Rp 170 – 215rb</b></span>
+      <span class="dc-total">± Rp 190 – 265 ribu</span>
+      <span class="dc-hint">Keliling kota ±15–20 km/hari · inap di rumah Mbah, belum makan</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HARI 04 ── -->
+<section id="hari4" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date"><span class="dm">Des 2026</span><span class="dd">23</span><span class="dw">Rabu</span></div>
+      <div>
+        <span class="day-tag">Fase 04 · Menuju dataran tinggi</span>
+        <h2 class="day-title">Pekalongan → Dieng</h2>
+        <p class="day-desc">Leg terpendek sepanjang trip: hanya ±61 km menanjak lewat Jalan Dieng–Bawang Batang. Seluruh rombongan berpindah ke Dieng dan menginap di sini sampai 26 Des.</p>
+        <div class="chips">
+          <span class="chip solid">±61 km</span>
+          <span class="chip">±1,2 jam setir</span>
+          <span class="chip">BBM Rp 90 – 115rb</span>
+          <span class="chip sea">±2.000 mdpl</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Estimasi tiba</div>
+        <div class="eta-v">Rabu, 23 Des — berangkat pagi, tiba sebelum sore</div>
+        <div class="eta-s">Waktu setir murni ±1,2 jam; jalur menanjak &amp; berkelok jadi realistis 1,5–2 jam plus istirahat. Sisa hari dipakai istirahat — jangan langsung keliling.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Segmen rute</div>
+        <div class="route">
+          <div class="seg"><span class="dot">01</span><div class="seg-name">Pekalongan → Bawang</div><div class="seg-km">±30 km</div><div class="seg-meta"><span class="flag">Non-tol</span>Jalan nasional &amp; kabupaten</div></div>
+          <div class="seg"><span class="dot">02</span><div class="seg-name">Bawang → Dieng</div><div class="seg-km">±31 km</div><div class="seg-meta"><span class="flag">Non-tol</span>Menanjak tajam — kecepatan rendah</div></div>
+          <div class="seg total"><div class="seg-name">Total Pekalongan → Dieng</div><div class="seg-km">±61 km</div><div class="seg-meta">±1,2 jam murni · 1,5–2 jam realistis</div></div>
+        </div>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/dir/?api=1&origin=Pekalongan,+Jawa+Tengah&destination=Dataran+Tinggi+Dieng,+Jawa+Tengah" target="_blank" rel="noopener">Pekalongan → Dieng <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Candi+Arjuna+Dieng" target="_blank" rel="noopener">Candi Arjuna <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Bukit+Sikunir+Dieng" target="_blank" rel="noopener">Bukit Sikunir <span class="arrow">↗</span></a>
+        </div>
+        <div class="note-box">
+          <div class="side-title">Bekal Dieng</div>
+          <ul>
+            <li>Jaket tebal, sarung tangan, syal — malam bisa 10 °C</li>
+            <li>Isi BBM penuh di Pekalongan sebelum menanjak</li>
+            <li>Berangkat pagi supaya tiba sebelum gelap di jalan menikung</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Fakta tempat</div>
+        <div class="facts">
+          <div class="fact"><div class="fk">Lokasi</div><div class="fv">Kab. Banjarnegara &amp; Wonosobo, Jawa Tengah · <b>±2.000 mdpl</b></div></div>
+          <div class="fact"><div class="fk">Cuaca Des</div><div class="fv">Rata-rata <b>10 °C (malam) – 19 °C (siang)</b></div></div>
+          <div class="fact"><div class="fk">Jalur</div><div class="fv">Jalan Dieng–Bawang Batang — satu-satunya jalan naik dari utara</div></div>
+          <div class="fact"><div class="fk">Inap</div><div class="fv">3 malam di Dieng (23–26 Des) — penginapan belum dipilih</div></div>
+          <div class="fact"><div class="fk">Persiapan</div><div class="fv">Servis rem &amp; ban sebelum menanjak — turunan panjang saat pulang</div></div>
+        </div>
+        <div class="gallery" style="margin-top:18px; border-top:0; border-left:0">
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sikunir,%20Dieng%20Plateau%202306%20mdpl%201.jpg?width=900" alt="Bukit Sikunir di Dataran Tinggi Dieng"><div class="gcap"><span>Sikunir — 2.306 mdpl</span><a href="https://commons.wikimedia.org/wiki/File:Sikunir,_Dieng_Plateau_2306_mdpl_1.jpg" target="_blank" rel="noopener">↗</a></div></div>
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Wisata%20Kawah%20Sikidang,%20Dieng,%20Banjarnegara.jpg?width=900" alt="Kawah Sikidang di Dieng"><div class="gcap"><span>Kawah Sikidang</span><a href="https://commons.wikimedia.org/wiki/File:Wisata_Kawah_Sikidang,_Dieng,_Banjarnegara.jpg" target="_blank" rel="noopener">↗</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya hari ini</span>
+      <span class="dc-item">BBM <b>Rp 90 – 115rb</b></span>
+      <span class="dc-total">± Rp 90 – 115 ribu</span>
+      <span class="dc-hint">BBM: Pertalite ±9–12 liter · tidak ada tol di rute ini</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HARI 05 ── -->
+<section id="hari5" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date tint"><span class="dm">Des 2026</span><span class="dd r">24–26</span><span class="dw">Kam – Sab</span></div>
+      <div>
+        <span class="day-tag">Fase 05 · Menjelajah Dieng</span>
+        <h2 class="day-title">Tiga Hari di Dataran Tinggi</h2>
+        <p class="day-desc">24–26 Des tanpa menyetir jauh. Rekomendasi: Kawah Sikidang, Telaga Warna, Candi Arjuna, sunrise di Bukit Sikunir, Museum Kailasa, dan Telaga Cebong yang lebih sepi.</p>
+        <div class="chips">
+          <span class="chip solid">24 – 26 Des</span>
+          <span class="chip">Kawah Sikidang</span>
+          <span class="chip">Telaga Warna</span>
+          <span class="chip">Candi Arjuna</span>
+          <span class="chip sea">Sunrise Sikunir</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Puncak kegiatan</div>
+        <div class="eta-v">Sunrise Sikunir — berangkat ±04.00</div>
+        <div class="eta-s">Sikunir terkenal dengan golden sunrise-nya. Alternatif sore: Telaga Cebong &amp; Museum Kailasa. Jangan kemas jadwal terlalu padat — udara dingin bikin cepat lelah.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Rekomendasi tempat</div>
+        <div class="facts">
+          <div class="fact"><div class="fk">Kawah Sikidang</div><div class="fv">Kawah aktif dengan area kunjung mudah dijangkau — datang pagi</div></div>
+          <div class="fact"><div class="fk">Telaga Warna</div><div class="fv">Danau berubah warna, dikelilingi jalur jalan kaki</div></div>
+          <div class="fact"><div class="fk">Candi Arjuna</div><div class="fv">Kompleks candi Hindu tertua di Jawa — paling enak pagi hari</div></div>
+          <div class="fact"><div class="fk">Bukit Sikunir</div><div class="fv">Spot <b>sunrise</b> 2.306 mdpl — berangkat sebelum subuh, bawa jaket</div></div>
+          <div class="fact"><div class="fk">Museum Kailasa</div><div class="fv">Museum Dieng — sejarah, arkeologi &amp; budaya dataran tinggi</div></div>
+          <div class="fact"><div class="fk">Telaga Cebong</div><div class="fv">Telaga kecil dekat Sikunir — lebih sepi, cocok sore hari</div></div>
+        </div>
+        <span class="open-tag">24 – 26 Des — semua titik buka ✓</span>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Kawah+Sikidang+Dieng" target="_blank" rel="noopener">Kawah Sikidang <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Telaga+Warna+Dieng" target="_blank" rel="noopener">Telaga Warna <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Museum+Kailasa+Dieng" target="_blank" rel="noopener">Museum Kailasa <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Telaga+Cebong+Dieng" target="_blank" rel="noopener">Telaga Cebong <span class="arrow">↗</span></a>
+        </div>
+      </div>
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Usulan jadwal</div>
+        <div class="route">
+          <div class="seg"><span class="dot">01</span><div class="seg-name">24 Des — tiba &amp; santai</div><div class="seg-km">Hari 1</div><div class="seg-meta"><span class="flag">Sore</span>Check-in, Telaga Cebong, istirahat</div></div>
+          <div class="seg"><span class="dot">02</span><div class="seg-name">25 Des — Dieng inti</div><div class="seg-km">Hari 2</div><div class="seg-meta"><span class="flag">Pagi</span>Candi Arjuna → Kawah Sikidang → Telaga Warna</div></div>
+          <div class="seg"><span class="dot">03</span><div class="seg-name">26 Des — sunrise &amp; pulang packing</div><div class="seg-km">Hari 3</div><div class="seg-meta"><span class="flag sea">Subuh</span>Sikunir → Museum Kailasa → kemas untuk 27 Des</div></div>
+        </div>
+        <div class="gallery" style="margin-top:18px; border-top:0; border-left:0">
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Golden%20sunrise%20gunung%20sikunir.jpg?width=900" alt="Golden sunrise dari Bukit Sikunir, Dieng"><div class="gcap"><span>Golden sunrise Sikunir</span><a href="https://commons.wikimedia.org/wiki/File:Golden_sunrise_gunung_sikunir.jpg" target="_blank" rel="noopener">↗</a></div></div>
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Telaga%20Warna%20Dieng%20Plateau%20(7493145002).jpg?width=900" alt="Telaga Warna di Dataran Tinggi Dieng"><div class="gcap"><span>Telaga Warna</span><a href="https://commons.wikimedia.org/wiki/File:Telaga_Warna_Dieng_Plateau_(7493145002).jpg" target="_blank" rel="noopener">↗</a></div></div>
+        </div>
+        <div class="note-box">
+          <div class="side-title">Malam 26 Des</div>
+          <p>Besok menyetir ke Jakarta ±410 km. Kemas malam ini, tidur lebih awal — berangkat pagi supaya tiba sebelum gelap.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya fase ini</span>
+      <span class="dc-item">BBM lokal <b>Rp 130 – 170rb</b></span>
+      <span class="dc-total">± Rp 130 – 170 ribu</span>
+      <span class="dc-hint">Tiket masuk obyek wisata tidak dihitung — cek harga resmi di lokasi</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HARI 06 ── -->
+<section id="hari6" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date"><span class="dm">Des 2026</span><span class="dd">27</span><span class="dw">Minggu</span></div>
+      <div>
+        <span class="day-tag">Fase 06 · Turun dari dataran tinggi</span>
+        <h2 class="day-title">Dieng → Jakarta</h2>
+        <p class="day-desc">Menurun dari Dieng, sambung Tol Cipali ke Jakarta. Minggu 28 &amp; Selasa 29 Des dipakai istirahat dan jalan-jalan (BXsea &amp; Ragunan) sebelum rombongan berangkat pulang 30 Des.</p>
+        <div class="chips">
+          <span class="chip solid">±410 km</span>
+          <span class="chip">±5,5 jam setir</span>
+          <span class="chip">Tol Rp 150 – 180rb</span>
+          <span class="chip">BBM Rp 460 – 585rb</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Estimasi tiba</div>
+        <div class="eta-v">Minggu, 27 Des — sore di Jakarta</div>
+        <div class="eta-s">Waktu setir murni ±5,5 jam; realistis 7–8 jam dengan istirahat. Turunan dari Dieng jauh lebih lambat daripada jalur naik — sisakan waktu.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Segmen rute</div>
+        <div class="route">
+          <div class="seg"><span class="dot">01</span><div class="seg-name">Dieng → Pekalongan</div><div class="seg-km">±61 km</div><div class="seg-meta"><span class="flag">Non-tol</span>Turunan tajam — rem bekerja keras · jalan nasional</div></div>
+          <div class="seg"><span class="dot">02</span><div class="seg-name">Pekalongan → Tol Cipali</div><div class="seg-km">±140 km</div><div class="seg-meta"><span class="flag tol">Tol</span>Masuk tol arah Pejagan · lanjut ke Jakarta</div></div>
+          <div class="seg"><span class="dot">03</span><div class="seg-name">Tol Cipali → Jakarta</div><div class="seg-km">±209 km</div><div class="seg-meta"><span class="flag tol">Tol</span>Sampai kawasan Jakarta Selatan</div></div>
+          <div class="seg total"><div class="seg-name">Total Dieng → Jakarta</div><div class="seg-km">±410 km</div><div class="seg-meta">±5,5 jam murni · 7–8 jam realistis</div></div>
+        </div>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/dir/?api=1&origin=Dataran+Tinggi+Dieng,+Jawa+Tengah&destination=Pasar+Minggu,+Jakarta+Selatan" target="_blank" rel="noopener">Dieng → Pasar Minggu <span class="arrow">↗</span></a>
+        </div>
+        <div class="note-box">
+          <div class="side-title">Turunan panjang</div>
+          <p>Dari Dieng ke Pekalongan semua menurun. Pakai gigi rendah, hindari rem terus-menerus — kalau rem mulai panas, berhenti dinginkan di rest area.</p>
+        </div>
+      </div>
+
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Rencana 28 – 29 Des</div>
+        <div class="facts">
+          <div class="fact"><div class="fk">Senin 28</div><div class="fv"><b>BXsea</b> — oceanarium di basement BXc 2, Bintaro Xchange</div></div>
+          <div class="fact"><div class="fk">Selasa 29</div><div class="fv"><b>Kebun Binatang Ragunan</b> — buka Selasa–Minggu 07.00–16.00</div></div>
+          <div class="fact"><div class="fk">Akses BXc</div><div class="fv">Stasiun Jurangmangu → terowongan <b>±4 menit</b></div></div>
+          <div class="fact"><div class="fk">Istirahat</div><div class="fv">Dua hari tanpa menyetir — pulihkan tenaga sebelum 1.200 km pulang</div></div>
+        </div>
+        <div class="gallery" style="margin-top:18px; border-top:0; border-left:0">
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Foto%20Di%20BXSEA%20Bintaro%20Jaya%20Xchange%20Pada%20(2024).jpg?width=900" alt="BXsea Oceanarium di Bintaro Jaya Xchange"><div class="gcap"><span>BXsea, basement BXc 2</span><a href="https://commons.wikimedia.org/wiki/File:Foto_Di_BXSEA_Bintaro_Jaya_Xchange_Pada_(2024).jpg" target="_blank" rel="noopener">↗</a></div></div>
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Mambruk%20Victoria.jpg?width=900" alt="Mambruk (merpati mahkota) di Kebun Binatang Ragunan"><div class="gcap"><span>Mambruk di Ragunan</span><a href="https://commons.wikimedia.org/wiki/File:Mambruk_Victoria.jpg" target="_blank" rel="noopener">↗</a></div></div>
+        </div>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=BXsea+Oceanarium+Bintaro" target="_blank" rel="noopener">BXsea <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Ragunan+Zoo,+Jakarta" target="_blank" rel="noopener">Ragunan <span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya hari ini</span>
+      <span class="dc-item">Tol <b>Rp 150 – 180rb</b></span>
+      <span class="dc-item">BBM <b>Rp 460 – 585rb</b></span>
+      <span class="dc-total">± Rp 610 – 765 ribu</span>
+      <span class="dc-hint">BBM: Pertalite ±46–59 liter (7–9 km/L)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HARI 07 ── -->
+<section id="hari7" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date tint"><span class="dm">Des 2026</span><span class="dd r">28–29</span><span class="dw">Sen – Sel</span></div>
+      <div>
+        <span class="day-tag">Fase 07 · Dua hari istirahat</span>
+        <h2 class="day-title">BXsea &amp; Ragunan</h2>
+        <p class="day-desc">Senin 28 Des ke BXsea (Bintaro Xchange), Selasa 29 Des ke Ragunan — Ragunan tutup tiap Senin, jadi urutannya pas. Ini jeda terakhir sebelum menyetir pulang dua hari beruntun.</p>
+        <div class="chips">
+          <span class="chip solid">BXsea — 28 Des</span>
+          <span class="chip">Ragunan — 29 Des</span>
+          <span class="chip">BBM Rp 90 – 115rb</span>
+          <span class="chip sea">Ragunan buka 07.00–16.00</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Jam terbaik</div>
+        <div class="eta-v">Ragunan 07.00 – 10.00, BXsea pagi</div>
+        <div class="eta-s">Satwa paling aktif dan udara paling sejuk di jam pertama. BXsea di basement BXc 2, BX Rink di lantai UG BXc 1 — satu mall, dua kegiatan.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Fakta Ragunan</div>
+        <div class="facts">
+          <div class="fact"><div class="fk">Alamat</div><div class="fv">Jl. Harsono RM No. 1, Pasar Minggu, Jakarta Selatan</div></div>
+          <div class="fact"><div class="fk">Jam buka</div><div class="fv">Selasa – Minggu, <b>07.00–16.00</b> · Senin tutup</div></div>
+          <div class="fact"><div class="fk">Tiket</div><div class="fv">Dewasa <b>Rp 4.000</b> · anak <b>Rp 3.000</b> · parkir sedan <b>Rp 6.000</b>/hari</div></div>
+          <div class="fact"><div class="fk">Schmutzer</div><div class="fv">Primate Center (pusat primata) <b>Rp 6.000–7.500</b></div></div>
+          <div class="fact"><div class="fk">Koleksi</div><div class="fv">140 ha · <b>295 spesies</b> · 4.040 satwa</div></div>
+          <div class="fact"><div class="fk">BXsea</div><div class="fv">Oceanarium basement BXc 2 · BX Rink UG BXc 1 · terowongan Jurangmangu 4 menit</div></div>
+        </div>
+        <span class="open-tag">Selasa 29 Des — Ragunan buka ✓</span>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Ragunan+Zoo,+Jakarta" target="_blank" rel="noopener">Ragunan <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=Bintaro+Jaya+Xchange+Mall" target="_blank" rel="noopener">BXc <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/search/?api=1&query=BX+Rink+Ice+Skating+Bintaro" target="_blank" rel="noopener">BX Rink <span class="arrow">↗</span></a>
+        </div>
+      </div>
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Galeri</div>
+        <div class="gallery" style="border-top:0; border-left:0">
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Jurangmangu%20-%20BXc%20tunnel%20entrance%2020240629%20040951.jpg?width=900" alt="Terowongan menuju Bintaro Xchange dari Stasiun Jurangmangu"><div class="gcap"><span>Terowongan dari Stasiun Jurangmangu</span><a href="https://commons.wikimedia.org/wiki/File:Jurangmangu_-_BXc_tunnel_entrance_20240629_040951.jpg" target="_blank" rel="noopener">↗</a></div></div>
+          <div class="gcell wide"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Macan%20Tutul%20Ragunan.jpg?width=900" alt="Macan tutul minum di Kebun Binatang Ragunan"><div class="gcap"><span>Macan tutul</span><a href="https://commons.wikimedia.org/wiki/File:Macan_Tutul_Ragunan.jpg" target="_blank" rel="noopener">↗</a></div></div>
+          <div class="gcell"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Orang%20Utan%20Ragunan.jpg?width=900" alt="Orangutan di Kebun Binatang Ragunan"><div class="gcap"><span>Orangutan</span><a href="https://commons.wikimedia.org/wiki/File:Orang_Utan_Ragunan.jpg" target="_blank" rel="noopener">↗</a></div></div>
+          <div class="gcell"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Owa%20jawa.jpg?width=900" alt="Owa jawa (gibon Jawa) di Kebun Binatang Ragunan"><div class="gcap"><span>Owa jawa</span><a href="https://commons.wikimedia.org/wiki/File:Owa_jawa.jpg" target="_blank" rel="noopener">↗</a></div></div>
+        </div>
+        <div class="note-box">
+          <div class="side-title">Malam 29 Des</div>
+          <p>Besok mulai perjalanan pulang 1.200 km dalam dua hari. Isi BBM penuh, isi saldo e-Money, siapkan bekal — 30 Des SPBU &amp; rest area menjelang Tahun Baru bisa ramai.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya dua hari ini</span>
+      <span class="dc-item">Tiket dewasa <b>Rp 4.000</b></span>
+      <span class="dc-item">Parkir <b>Rp 6.000 – 20rb</b></span>
+      <span class="dc-item">BBM <b>Rp 90 – 115rb</b></span>
+      <span class="dc-total">± Rp 110 – 145 ribu</span>
+      <span class="dc-hint">Tiket BXsea &amp; BX Rink tidak dihitung — cek harga resmi</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── HARI 08 ── -->
+<section id="hari8" class="day">
+  <div class="wrap">
+    <div class="day-head reveal">
+      <div class="day-date"><span class="dm">Des 2026</span><span class="dd r">30–31</span><span class="dw">Rab – Kam</span></div>
+      <div>
+        <span class="day-tag">Fase 08 · Perjalanan pulang</span>
+        <h2 class="day-title">Jakarta → Perawang</h2>
+        <p class="day-desc">Dua hari menyetir pulang: 30 Des Jakarta → feri Merak–Bakauheni → Palembang, bermalam di Palembang; 31 Des lanjut Palembang → Perawang. Tiba sebelum 1 Januari 2027.</p>
+        <div class="chips">
+          <span class="chip solid">±1.205 km</span>
+          <span class="chip">2 hari menyetir</span>
+          <span class="chip">Tol + kapal Rp 660 – 880rb</span>
+          <span class="chip">BBM Rp 1,4 – 1,8 jt</span>
+          <span class="chip sea">1× feri wajib</span>
+        </div>
+      </div>
+      <div class="eta">
+        <div class="eta-k">Estimasi tiba</div>
+        <div class="eta-v">Jumat, 1 Januari 2027 — atau malam 31 Des</div>
+        <div class="eta-s">Dihitung 2 hari: 30 Des ±600 km + 31 Des ±605 km. Kalau berangkat pagi tiap hari, tiba Perawang sore 31 Des — masih sebelum pergantian tahun.</div>
+      </div>
+    </div>
+
+    <div class="day-body">
+      <div class="col l reveal">
+        <div class="col-title">Perhentian</div>
+        <ul class="stops">
+          <li class="stop-day">Rabu, 30 Des · Jakarta → Palembang</li>
+          <li class="stop"><span class="t">07.00</span><span class="dot"></span><span class="b"><b>Jakarta</b><span>Berangkat — isi BBM &amp; e-Money penuh</span></span></li>
+          <li class="stop"><span class="t">±12.00</span><span class="dot"></span><span class="b"><b>Merak — antre kapal</b><span>Jelang Tahun Baru: antre bisa panjang</span></span></li>
+          <li class="stop day-end"><span class="t">±17.00</span><span class="dot"></span><span class="b"><b>Palembang</b><span>Bermalam (hotel belum dipilih)</span></span></li>
+          <li class="stop-day">Kamis, 31 Des · Palembang → Perawang</li>
+          <li class="stop"><span class="t">07.00</span><span class="dot"></span><span class="b"><b>Palembang → Perawang</b><span>Lintas Timur ±729 km, isi BBM tiap kota</span></span></li>
+          <li class="stop"><span class="t">±19.00</span><span class="dot"></span><span class="b"><b>Perawang</b><span>Tiba — atau sambung 1 Jan pagi</span></span></li>
+        </ul>
+        <div class="note-box">
+          <div class="side-title">Menjelang Tahun Baru</div>
+          <p>30–31 Des SPBU, rest area, dan bengkel banyak yang tutup lebih awal, dan lalu lintas menuju pelabuhan padat. <b>Isi BBM sejak Jakarta</b>, jangan tunggu sisa setengah tangki di Lampung.</p>
+        </div>
+      </div>
+
+      <div class="col r reveal" style="transition-delay:60ms">
+        <div class="col-title">Segmen rute</div>
+        <div class="route">
+          <div class="seg"><span class="dot">01</span><div class="seg-name">Jakarta → Palembang<span class="seg-day">· 30 Des</span></div><div class="seg-km">±566 km</div><div class="seg-meta"><span class="flag tol">Tol</span>Tol Dalam Kota + Jakarta–Merak + Trans-Sumatra</div></div>
+          <div class="seg sub"><div class="seg-name">Feri Merak → Bakauheni<span class="seg-day">· 30 Des</span></div><div class="seg-km">±37 km</div><div class="seg-meta"><span class="flag sea">Kapal</span>Selat Sunda · ±2–3 jam — termasuk di atas</div></div>
+          <div class="seg"><span class="dot">02</span><div class="seg-name">Palembang → Perawang<span class="seg-day">· 31 Des</span></div><div class="seg-km">±729 km</div><div class="seg-meta"><span class="flag">Lintas Timur</span>Non-tol sebagian · ±8,8 jam</div></div>
+          <div class="seg total"><div class="seg-name">Total pulang</div><div class="seg-km">±1.205 km</div><div class="seg-meta">Dibagi 2 hari · ±15,5 jam setir</div></div>
+        </div>
+        <div class="src-links">
+          <span class="src-label">Peta:</span>
+          <a class="src" href="https://www.google.com/maps/dir/?api=1&origin=Pasar+Minggu,+Jakarta+Selatan&destination=Perawang,+Siak,+Riau" target="_blank" rel="noopener">Jakarta → Perawang <span class="arrow">↗</span></a>
+          <a class="src" href="https://www.google.com/maps/dir/?api=1&origin=Merak,+Cilegon,+Banten&destination=Bakauheni,+Lampung+Selatan" target="_blank" rel="noopener">Rute feri <span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-cost reveal">
+      <span class="dc-label">Biaya fase ini</span>
+      <span class="dc-item">Tol + kapal <b>Rp 660 – 880rb</b></span>
+      <span class="dc-item">BBM <b>Rp 1,4 – 1,8 jt</b></span>
+      <span class="dc-total">± Rp 2,0 – 2,7 juta</span>
+      <span class="dc-hint">BBM: Pertalite ±134–172 liter (7–9 km/L)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── REKOMENDASI ── -->
+<section id="rekomendasi" class="section">
+  <div class="wrap" style="padding-left:0; padding-right:0; border:0">
+    <div class="section-head reveal">
+      <div>
+        <span class="day-tag">Tempat mampir</span>
+        <h2 class="section-title" style="margin-top:10px">Rekomendasi destinasi</h2>
+        <p class="section-desc">Tiga tempat pilihan rombongan untuk disisipkan saat ada waktu luang. Lokasi &amp; jam buka cek lewat tautan peta masing-masing sebelum berangkat.</p>
+      </div>
+    </div>
+
+    <div class="recs reveal">
+      <div class="rec">
+        <span class="rec-n">01</span>
+        <div class="rec-name">Bakeyard, Bogor</div>
+        <p class="rec-desc">Bakery &amp; kafe — opsi sarapan atau brunch sebelum rombongan lanjut perjalanan.</p>
+        <a class="src" href="https://www.google.com/maps/search/?api=1&query=Bakeyard+Bogor" target="_blank" rel="noopener">Peta <span class="arrow">↗</span></a>
+      </div>
+      <div class="rec">
+        <span class="rec-n">02</span>
+        <div class="rec-name">Sagaleh</div>
+        <p class="rec-desc">Jeda kopi — semua outlet Sagaleh ada di Jakarta Selatan, jadi gampang disisipkan saat rombongan di Jakarta.</p>
+        <a class="src" href="https://www.google.com/maps/search/?api=1&query=Sagaleh+Jakarta+Selatan" target="_blank" rel="noopener">Peta <span class="arrow">↗</span></a>
+      </div>
+      <div class="rec">
+        <span class="rec-n">03</span>
+        <div class="rec-name">Arin's Bakery and Cafe, Bogor</div>
+        <p class="rec-desc">Bakery &amp; kafe di Bogor — teman kopi sore dan kue untuk bekal jalan.</p>
+        <a class="src" href="https://www.google.com/maps/search/?api=1&query=Arin%27s+Bakery+and+Cafe+Bogor" target="_blank" rel="noopener">Peta <span class="arrow">↗</span></a>
+      </div>
+    </div>
+
+    <div class="note-box reveal" style="margin-top:24px">
+      <div class="side-title">Kapan bisa disisipkan?</div>
+      <p>Dua tempat di Bogor masih sekitar <b>1 – 1,5 jam</b> dari Jakarta — paling realistis saat jeda <b>28 – 29 Des</b>, bukan di hari menyetir. Semua outlet <b>Sagaleh</b> ada di Jakarta Selatan, jadi paling mudah disisipkan saat rombongan tidak menyetir. Kalau jadwal mepet, lewati dulu: perjalanan tetap prioritas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── BIAYA ── -->
+<section id="biaya" class="section">
+  <div class="wrap" style="padding-left:0; padding-right:0; border:0">
+    <div class="section-head reveal">
+      <div>
+        <span class="day-tag">Rincian</span>
+        <h2 class="section-title" style="margin-top:10px">Total estimasi biaya</h2>
+        <p class="section-desc">Kendaraan penumpang golongan I, rute di atas. BBM dihitung untuk <b>Toyota Innova bensin 2015</b> (konsumsi 7–9 km/L) memakai <b>Pertalite</b>.</p>
+      </div>
+      <div class="grand">
+        <div class="g-k">Tol + kapal + BBM</div>
+        <div class="g-v">Rp 5,8 – 7,7 juta</div>
+        <div class="g-s">±3.800 km ber-BBM · belum makan &amp; penginapan</div>
+      </div>
+    </div>
+
+    <table class="tabel reveal">
+      <thead><tr><th>Pos biaya</th><th class="r">Perkiraan</th><th class="hide-sm">Catatan</th></tr></thead>
+      <tbody>
+        <tr><td>Tol Sumatera <span class="note">(A1 Bayung Lencir–Tempino · A2 Palembang–Bakauheni &amp; ruas pulang)</span></td><td class="r">Rp 650.000 – 1.050.000</td><td class="note hide-sm">Trans-Sumatra gol. I ± Rp 800–1.100/km; A2 hampir seluruhnya tol</td></tr>
+        <tr><td>Kapal feri <span class="note">(Bakauheni ↔ Merak, 2× — 17 &amp; 30 Des)</span></td><td class="r">Rp 320.000 – 400.000</td><td class="note hide-sm">Gol. II + 1 sopir per sekali jalan; penumpang tambahan ± Rp 15.000/orang</td></tr>
+        <tr><td>Tol Jawa <span class="note">(Cipali + Dalam Kota, leg 17 &amp; 27 Des)</span></td><td class="r">Rp 550.000 – 680.000</td><td class="note hide-sm">Jakarta–Pekalongan, Dieng–Jakarta, Jakarta–Bakauheni</td></tr>
+        <tr class="sub"><td>Subtotal tol + kapal</td><td class="r">Rp 1,5 – 2,1 juta</td><td class="note hide-sm">Golongan I, belum termasuk BBM</td></tr>
+        <tr><td><b>BBM Pertalite</b> <span class="note">(±3.800 km: seluruh rute + keliling kota)</span></td><td class="r">Rp 4.200.000 – 5.400.000</td><td class="note hide-sm">Innova 2015 · 420–540 liter (1 liter ≈ 7–9 km) × Rp 10.000</td></tr>
+        <tr><td>Tiket &amp; parkir <span class="note">(Ragunan, BXsea, wisata Dieng, parkir)</span></td><td class="r">Rp 50.000 – 150.000</td><td class="note hide-sm">Ragunan dewasa Rp 4.000 + parkir Rp 6.000; sisanya cek resmi</td></tr>
+        <tr class="total"><td>Total estimasi (tol + kapal + BBM + tiket)</td><td class="r">Rp 5,8 – 7,7 juta</td><td class="hide-sm" style="color:rgba(255,255,255,0.7)">+ makan &amp; penginapan ±14 malam</td></tr>
+      </tbody>
+    </table>
+
+    <p class="disclaimer">Asumsi BBM: konsumsi <b>Toyota Innova bensin 2015 (2.000 cc)</b> dihitung <b>7–9 km/L</b> (artinya 1 liter cukup untuk menempuh 7–9 km) — realistis untuk mobil tua dengan AC menyala serta muatan 5–8 orang &amp; barang: di Lintas Timur mendekati 7 km/L, di tol bisa 8–9 km/L. Jarak ber-BBM <b>±3.800 km</b> (rute utama ±3.250 km + keliling Palembang/Pekalongan/Dieng/Jakarta), memakai <b>Pertalite Rp 10.000/liter</b> (asumsi — cek harga resmi Pertamina sebelum berangkat). Angka tol &amp; kapal adalah ESTIMASI berdasarkan panjang rute dan kisaran tarif — bukan tarif resmi. Verifikasi lewat aplikasi Jasa Marga, Hutama Karya, Marga Mandalasakti, dan Ferizy (ASDP) sebelum berangkat. Harga hotel, makan, dan tiket obyek wisata belum dihitung.</p>
+
+    <div class="checks">
+      <div class="check accent reveal"><div class="check-title">Sebelum berangkat</div><ul><li>Isi saldo e-Money / kartu tol — gerbang cashless</li><li>Servis ringan: ban, rem, lampu, air radiator, wiper</li><li>Cek tiket &amp; jadwal kapal via aplikasi Ferizy</li><li>Innova muat 7 — rombongan maksimal 8 orang, hitung bagasi</li></ul></div>
+      <div class="check reveal" style="transition-delay:40ms"><div class="check-title">Di jalan</div><ul><li>Istirahat tiap 2 jam; tukar sopir bila bisa</li><li>Hindari mengantuk — berhenti &amp; tidur 20 menit</li><li>Pantau antrean kapal — 30 Des jelang Tahun Baru ramai</li><li>SPBU jarang di Lintas Timur: jangan tunggu lampu E</li></ul></div>
+      <div class="check reveal" style="transition-delay:80ms"><div class="check-title">Kalau mobil lebih boros</div><ul><li>Irit: 1 liter ≈ 9 km → BBM ± Rp 4,2 juta</li><li>Biasa: 1 liter ≈ 7 km → BBM ± Rp 5,4 juta</li><li>Boros: 1 liter ≈ 6 km → BBM ± Rp 6,3 juta</li><li>Paling boros: total perjalanan (BBM + tol + kapal) ± Rp 8,5 juta</li><li>Catat berapa liter tiap isi — itu jarak yang bisa ditempuh tiap liter</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SARAN ── -->
+<section id="saran" class="section">
+  <div class="wrap" style="padding-left:0; padding-right:0; border:0">
+    <div class="section-head reveal">
+      <div>
+        <span class="day-tag">Saran &amp; masukan</span>
+        <h2 class="section-title" style="margin-top:10px">Kirim saran kamu</h2>
+        <p class="section-desc">Punya <b>saran perjalanan</b>, <b>saran destinasi</b>, atau <b>perubahan untuk website ini</b>? Tulis di bawah — teksnya dirapikan otomatis, lalu kirim ke grup lewat WhatsApp atau salin tempel di chat mana pun.</p>
+      </div>
+    </div>
+
+    <form class="saran-form reveal" id="saranForm" novalidate>
+      <div class="sf-row">
+        <div class="sf-field">
+          <span class="sf-label" id="sfJenisLabel">Jenis saran</span>
+          <div class="sf-chips" role="radiogroup" aria-labelledby="sfJenisLabel">
+            <label class="sf-chip"><input type="radio" name="jenis" value="Saran perjalanan" checked><span>Saran perjalanan</span></label>
+            <label class="sf-chip"><input type="radio" name="jenis" value="Saran destinasi"><span>Saran destinasi</span></label>
+            <label class="sf-chip"><input type="radio" name="jenis" value="Perubahan website"><span>Perubahan website</span></label>
+          </div>
+        </div>
+        <label class="sf-field">
+          <span class="sf-label">Nama pengirim</span>
+          <input class="sf-input" type="text" id="sfNama" maxlength="40" placeholder="Nama panggilan (opsional)" autocomplete="name">
+        </label>
+      </div>
+
+      <label class="sf-field">
+        <span class="sf-label">Isi saran</span>
+        <textarea class="sf-input" id="sfIsi" rows="4" maxlength="600" placeholder="Contoh: mampir ke pantai X saat lewat Palembang, atau tambahkan info jam buka obyek Dieng..."></textarea>
+      </label>
+
+      <div class="sf-meta">
+        <span class="sf-hint">Satu ide per kirim — punya banyak saran? Kirim beberapa kali supaya gampang dibahas di grup.</span>
+        <span class="sf-count" id="sfCount">0 / 600</span>
+      </div>
+
+      <div class="sf-actions">
+        <button class="btn primary" type="submit">Kirim ke WhatsApp ↗</button>
+        <button class="btn" type="button" id="sfCopy">Salin teks</button>
+        <span class="sf-status" id="sfStatus" role="status" aria-live="polite"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="wrap" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:11px; font-family:var(--font-mono); color:var(--muted); letter-spacing:0.04em; padding-top:14px; padding-bottom:24px">
+  <span>© Road Trip 16 – 31 Desember 2026 • Perawang → Palembang → Dieng → Jakarta</span>
+  <span>Rute: OSRM • Foto: Wikimedia Commons • Peta: Google Maps</span>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    const d = parseInt(e.target.dataset.delay || 0);
+    setTimeout(()=>{
+      e.target.classList.add('in');
+      if(e.target.classList.contains('cal')) setTimeout(()=> e.target.classList.add('done'), 1500);
+    }, d);
+    io.unobserve(e.target);
+  }
+}),{threshold:0.10, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  if(!el.style.transitionDelay) el.dataset.delay = (i%4)*60;
+  io.observe(el);
+});
+addEventListener('load',()=>{
+  document.querySelectorAll('.hero .reveal').forEach((el,i)=> setTimeout(()=> el.classList.add('in'), 80+i*90));
+});
+addEventListener('scroll',()=>{
+  const y=scrollY;
+  document.querySelectorAll('.nav a').forEach(a=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(!el) return;
+    const top=el.offsetTop - 90;
+    if(y>=top && y < top+el.offsetHeight) a.classList.add('active');
+    else a.classList.remove('active');
+  });
+},{passive:true});
+
+/* hero interaktif — parallax kartu, jejak foto, sorotan kursor (mati bila prefers-reduced-motion) */
+(()=>{
+  const hero=document.querySelector('.hero'), stage=document.querySelector('.stage');
+  if(!hero||!stage) return;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine=matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if(reduce||!fine) return;
+
+  /* cahaya lembut mengikuti kursor di seluruh hero */
+  hero.addEventListener('pointermove',e=>{
+    const r=hero.getBoundingClientRect();
+    hero.style.setProperty('--mx',(((e.clientX-r.left)/r.width)*100).toFixed(2)+'%');
+    hero.style.setProperty('--my',(((e.clientY-r.top)/r.height)*100).toFixed(2)+'%');
+  },{passive:true});
+
+  /* parallax kedalaman antar kartu */
+  const slots=[...stage.querySelectorAll('.fslot')];
+  if(slots.length){
+    let raf=0,tx=0,ty=0;
+    const apply=()=>{ raf=0;
+      slots.forEach(s=>{ const d=+s.dataset.depth||10;
+        s.style.translate=(-tx*d).toFixed(1)+'px '+(-ty*d).toFixed(1)+'px'; });
+    };
+    stage.addEventListener('pointermove',e=>{
+      const r=stage.getBoundingClientRect();
+      tx=(e.clientX-r.left)/r.width-0.5;
+      ty=(e.clientY-r.top)/r.height-0.5;
+      if(!raf) raf=requestAnimationFrame(apply);
+    },{passive:true});
+    stage.addEventListener('pointerleave',()=>{ tx=0; ty=0; if(!raf) raf=requestAnimationFrame(apply); });
+  }
+
+  /* jejak foto — jejak muncul mengikuti kursor, lalu memudar */
+  const srcs=[...stage.querySelectorAll('.fc-media img')].map(i=>i.currentSrc||i.src).filter(Boolean);
+  if(srcs.length){
+    let last={x:-1e4,y:-1e4},n=0;
+    stage.addEventListener('pointermove',e=>{
+      const r=stage.getBoundingClientRect();
+      const x=e.clientX-r.left, y=e.clientY-r.top;
+      if(Math.hypot(x-last.x,y-last.y)<86) return;
+      last={x,y};
+      const t=document.createElement('div');
+      t.className='trail';
+      t.style.left=x+'px'; t.style.top=y+'px';
+      t.style.setProperty('--tr',((n%2?1:-1)*(3+(n%4)*2))+'deg');
+      t.style.backgroundImage='url("'+srcs[n++%srcs.length]+'")';
+      stage.appendChild(t);
+      t.addEventListener('animationend',()=>t.remove(),{once:true});
+      const old=stage.querySelectorAll('.trail');
+      if(old.length>10) old[0].remove();
+    },{passive:true});
+  }
+})();
+
+/* formulir saran — WhatsApp + salin teks (tanpa server) */
+(()=>{
+  const f=document.getElementById('saranForm'); if(!f) return;
+  const isi=document.getElementById('sfIsi'), nama=document.getElementById('sfNama'),
+        count=document.getElementById('sfCount'), status=document.getElementById('sfStatus');
+  let t;
+  const say=(msg,cls)=>{ status.textContent=msg; status.className='sf-status show'+(cls?' '+cls:''); clearTimeout(t); t=setTimeout(()=>status.classList.remove('show'), 5000); };
+  isi.addEventListener('input',()=>{ count.textContent=isi.value.length+' / 600'; });
+  const compose=()=>{
+    const jenis=(f.querySelector('input[name="jenis"]:checked')||{}).value||'Saran';
+    const n=nama.value.trim();
+    return '[SARAN TRIP 16–31 DES 2026]\nJenis: '+jenis+'\nDari: '+(n||'Anonim')+'\n\n'+isi.value.trim();
+  };
+  const guard=()=>{ if(isi.value.trim()) return true; say('Tulis dulu sarannya di kolom "Isi saran".'); isi.focus(); return false; };
+  f.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!guard()) return;
+    const url='https://wa.me/?text='+encodeURIComponent(compose());
+    const w=window.open(url,'_blank','noopener');
+    if(w) say('WhatsApp terbuka — pilih grup tujuan, lalu kirim.');
+    else say('Popup diblokir browser — klik sekali lagi, atau pakai "Salin teks".');
+  });
+  document.getElementById('sfCopy').addEventListener('click',async()=>{
+    if(!guard()) return;
+    const text=compose();
+    try{ await navigator.clipboard.writeText(text); say('Teks tersalin — tempel di chat grup.'); }
+    catch(err){
+      const ta=document.createElement('textarea'); ta.value=text; ta.style.cssText='position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      let ok=false; try{ ok=document.execCommand('copy'); }catch(e2){}
+      ta.remove();
+      say(ok?'Teks tersalin — tempel di chat grup.':'Gagal menyalin otomatis — blok & salin manual ya.');
+    }
+  });
+})();
+</script>
+</body>
+</html>
